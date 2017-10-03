@@ -1,9 +1,4 @@
-var registerApp = angular.module('registerApp', [], function($interpolateProvider){
-    $interpolateProvider.startSymbol('<%');
-    $interpolateProvider.endSymbol('%>');
-});
-
-var compRegisterApp = angular.module('compRegisterApp', [], function($interpolateProvider){
+var app = angular.module('app', [], function($interpolateProvider){
     $interpolateProvider.startSymbol('<%');
     $interpolateProvider.endSymbol('%>');
 });
@@ -12,11 +7,12 @@ var compRegisterApp = angular.module('compRegisterApp', [], function($interpolat
   $qProvider.errorOnUnhandledRejections(false);
   }]);
 */
-registerApp.controller('registerController', ['$scope', '$http', function($scope, $http){
+app.controller('registerController', ['$scope', '$http', function($scope, $http){
 
     $scope.register = function(){
 
 	if($scope.password !== $scope.password2){
+	    alert('password not match');
 	    alert('password not match');
 	}else{
 	    var formData = {
@@ -49,7 +45,7 @@ registerApp.controller('registerController', ['$scope', '$http', function($scope
 		for(var x in err.data.errors){
 		    console.log(err.data.errors[x]);
 		}
-	    });;
+	    });
 	}
     }
     
@@ -57,10 +53,9 @@ registerApp.controller('registerController', ['$scope', '$http', function($scope
 
 
 // companies
-compRegisterApp.controller('compRegisterController', ['$scope', '$http', function($scope, $http){
+app.controller('compRegisterController', ['$scope', '$http', function($scope, $http){
 
     $scope.register = function(){
-
 	if($scope.comp_password !== $scope.comp_password2){
 	    alert('password not match');
 	}else{
@@ -94,9 +89,36 @@ compRegisterApp.controller('compRegisterController', ['$scope', '$http', functio
 		for(var x in err.data.errors){
 		    console.log(err.data.errors[x]);
 		}
-	    });;
+	    });
 	}
     }
     
 }]);
 
+// login
+app.controller('loginController', ['$scope', '$http', function($scope, $http){
+    
+    $scope.login = function(){
+	var formData = {
+	    email: $scope.email,
+	    password: $scope.password,
+	};
+
+	$scope.login_tp = document.getElementById('login-tp').value;
+	console.log(formData);
+	console.log($scope.login_tp);
+	var loginRequest = $http({
+	    method: 'POST',
+	    url: $scope.login_tp,
+	    data: formData
+	});
+
+	loginRequest.then(function(resp){
+	    if(resp.status === 200){
+		console.log(resp);
+	    }
+	}).catch(function(err){
+	    console.log(err);
+	});
+    }
+}]);

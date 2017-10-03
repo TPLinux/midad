@@ -4,7 +4,7 @@
 @endsection
 
 @section('content')
-    <div ng-app="registerApp" ng-controller="registerController">
+    <div ng-app="app" ng-controller="registerController">
 	<form onsubmit="return false;">
 	    {{ csrf_field() }}
 	    <input name="u_fname" ng-model="fname" type="text" placeholder="الاسم الاول"/>

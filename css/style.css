@@ -15,7 +15,7 @@ font-family: 'Amatic SC', cursive;
 font-family: 'Cairo', sans-serif;
 font-family: 'Reem Kufi', sans-serif;
 font-family: 'Lateef', cursive;*/
-/* HEXAGON SHAPE */ 
+
  
 
 
@@ -38,13 +38,20 @@ body{
 li{
     list-style: none;
 }
-
+a{
+    text-decoration: none;
+    
+}
+a:hover{
+    text-decoration: none;
+    
+}
 .clear{
     margin:0;
     padding:0;
     clear: both;
 }
-/****** HEXAGON *****/
+/* HEXAGON SHAPE */ 
 .hex1 {
   width: 25px;
   height: 25px;
@@ -63,6 +70,7 @@ li{
   position: relative;
   display: inline-block;
     text-align: center;
+    z-index: 1
 }
 
 .hexagon {
@@ -71,6 +79,8 @@ li{
   height: 100%;
   width: calc(100% * 0.57735);
   display: inline-block;
+    z-index: -1
+        
     
 }
 
@@ -107,10 +117,11 @@ z-index: -1;
 }
 /* HEXAGON SHAPE */ 
 .header{
-    height:780px;
+    height:700px;
     width:100%;
-    /*background-image: url(../img/header.jpg);
-    background-size: cover;*/ 
+    background-image: url(../img/header.jpg);
+    background-size: cover;
+    background-attachment: fixed;
     padding:0;
     position: relative;
     overflow: hidden;
@@ -120,28 +131,34 @@ z-index: -1;
     height: 100%;
     margin: 0;
     padding:0;
-    background-color:rgba(0,0,0,0,1);
     position: absolute;
     left: 0;
     top:0;
    z-index: 1;
-    opacity: 0.6
+    opacity: 0.7
+}
+.header>div:nth-child(1)>iframe{
+    width: 100%;
+    height: 100%;
 }
 .header>div:nth-child(2){
     position: relative;
     text-align: center;
     z-index: 99
 }
-.header>div:nth-child(2)>.container>.row>ul{
+.header>div:nth-child(2)>.container>.row>.firstbar{
+    background:  rgba(0,0,0,0.8);
+}
+.header>div:nth-child(2)>.container>.row>.firstbar>ul{
    text-align: left;
     margin-top: 20px;
-    margin-bottom: 70px;
+    margin-bottom: 30px;
 }
-.header>div:nth-child(2)>.container>.row>ul>li{
+.header>div:nth-child(2)>.container>.row>.firstbar>ul>li{
     display: inline-block;
 }
 
-.header>div:nth-child(2)>.container>.row>ul>li{
+.header>div:nth-child(2)>.container>.row>.firstbar>ul>li{
     color:white;
     border:1px solid white;
     padding:9px;
@@ -149,29 +166,41 @@ z-index: -1;
 }
 
 .header>div:nth-child(2)>.container>.row>.home-login{
-    
     width: 300px;
     height: 550px;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.8);
     z-index: 99999;
-    
-    padding:5px;
     color:white;
     
 }
 .header>div:nth-child(2)>.container>.row>.home-login>div{
-    border:0.3px gray solid;
     width: 100%;
     height: 100%;
     padding-right: 20px;
     padding-left: 20px;
+}
+.header>div:nth-child(2)>.container>.row>.home-login>ul{
+    margin-bottom: 15px;
+}
+.header>div:nth-child(2)>.container>.row>.home-login>ul>a>li{
+    float:right;
+    background: white;
+    width: 50%;
+    color:black;
+    padding:10px;
+    
+    
+}
+.header>div:nth-child(2)>.container>.row>.home-login>ul>a>.active-login{
+    background: rgba(0,0,0,0.0);
+    color:white;
 }
 .header>div:nth-child(2)>.container>.row>.home-login>div>h1{
     margin:0 auto;
     padding:8px;
     font-size: 19px;
     text-align: center;
-    margin-top: 20px;
+   
 }
 .header>div:nth-child(2)>.container>.row>.home-login>div>h6{
     text-align: center;
@@ -245,20 +274,21 @@ z-index: -1;
     height: 40px;
     padding:7px;
     border:0;
-    background: rgb(216, 36, 36);
+    background: rgb(249, 149, 0);
     transition: all ease 0.3s;
     
 }
 .header>div:nth-child(2)>.container>.row>.home-login>div>form>.login-button>input:hover{
-    color: rgb(216, 36, 36);
+    color: rgb(249, 149, 0);
     background: rgb(255, 255, 255);
-    border: 1px solid rgb(216, 36, 36);
+    border: 1px solid rgb(249, 149, 0);
 }
 
 .header>div:nth-child(2)>.container>.row>.home-login>div>.forget-password>h3{
     font-size: 13px;
     color:rgb(209, 209, 209);
     cursor: pointer;
+    text-align: left;
     transition: all ease 0.5s;
 }
 .header>div:nth-child(2)>.container>.row>.home-login>div>.forget-password>h3:hover{
@@ -284,12 +314,15 @@ z-index: -1;
 }
 .header>div:nth-child(2)>.container>.row>.home-login>div>.register-new>ul>a>li{
     display: inline-block;
-    margin: 0 10px;
+    margin: 0 33px;
     float:right;
+}
+.header>div:nth-child(2)>.container>.row>.home-login>div>.register-new>ul>a>li>.hex30>div{
+    transition: all ease 0.3s;
 }
 
 .header>div:nth-child(2)>.container>.row>.home-login>div>.register-new>ul>a:nth-child(1)>li>.hex30>div:hover{
-    background: red;
+    background: rgb(221, 62, 62);
     border:none !important;
 }
 .header>div:nth-child(2)>.container>.row>.home-login>div>.register-new>ul>a:nth-child(1)>li>.hex30>div:hover:before{
@@ -299,26 +332,36 @@ z-index: -1;
     border:none;
 }
 
+.header>div:nth-child(2)>.container>.row>.home-login>div>.register-new>ul>a:nth-child(2)>li>.hex30>div:hover{
+    background: rgb(0, 114, 237);
+    border:none !important;
+}
+.header>div:nth-child(2)>.container>.row>.home-login>div>.register-new>ul>a:nth-child(2)>li>.hex30>div:hover:before{
+    border:none;
+}
+.header>div:nth-child(2)>.container>.row>.home-login>div>.register-new>ul>a:nth-child(2)>li>.hex30>div:hover:after{
+    border:none;
+}
+
 .header>div:nth-child(2)>.container>.row>.home-login>div>.register-new>ul>a>li>.hex30>div>div{
-    position: relative;
     width: 100%;
     height: 100%;
-    vertical-align: middle;
     text-align: center;
+    z-index: 999;
+    padding:0;
+    margin:0;
     
 }
 .header>div:nth-child(2)>.container>.row>.home-login>div>.register-new>ul>a>li>.hex30>div>div>h3{
     height: 30px;
-    font-size: 10px;
+    width: 45px;
+    margin-right: -5px;
+    margin-top:20px;
+    
+    text-align: center;
+    font-size: 12px;
     color:white ;
-    vertical-align: center;
-    padding-top:5px;
-    position: absolute;
-    top:0;
-    left:0;
-    right: 0;
-    bottom: 0;
-    margin:auto;
+    
     
 }
 

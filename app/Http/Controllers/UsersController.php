@@ -26,7 +26,8 @@ class UsersController extends Controller
         $auth = User::where('u_email',$req->email)->where('u_password',sha1($req->password))->first();
         if($auth){
             Auth::login($auth, true);
-            return redirect('userd');
+            // return redirect('userd');
+            return "wow";
             
         }else{
             echo "Invalid login";

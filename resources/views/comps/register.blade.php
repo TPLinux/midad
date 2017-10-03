@@ -4,7 +4,7 @@
 @endsection
 
 @section('content')
-    <div ng-app="compRegisterApp" ng-controller="compRegisterController">
+    <div ng-controller="compRegisterController">
 	<form  onsubmit="return false;"> <!-- onsubmit="return true;" -->
 	    {{ csrf_field() }}
 	    <input ng-model="comp_name" type="text" placeholder="اسم الشركة"/>

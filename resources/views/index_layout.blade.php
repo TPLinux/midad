@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html  ng-app="app" >
 
     <head>
 	<meta charset="UTF-8">
@@ -10,133 +10,113 @@
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/animate.css">
 	<link rel="stylesheet" href="css/style.css">
-	<script src="js/angular.min.js"></script>
-	<script src="js/angular_apps.js"></script>
+	<script src="js/angular.min.js"></script>	
     </head>
 
     <body>
 	<section class="container-fluid header">
-            <div>
-		<!-- <iframe width="105%" height="105%" src="https://www.youtube.com/embed/92PArZEYdgU?autoplay=1&rel=0&showinfo=0&controls=0&autohide=1" frameborder="0" allowfullscreen></iframe> -->
-	    </div>
+            <div></div>
             <div>
 		<div class="container">
                     <div class="row">
-			<ul>
-                            
-                            <li>+90 555 331 55 55</li>
-			</ul>
+			<div class="firstbar">
+                            <ul>
+				<li>+90 555 331 55 55</li>
+                            </ul>
+			</div>
 			<div class="home-login">
+			    <ul>
+				<a href="#user"><li data-u="{{ route('login.user') }}" class="login-form active-login">متطوع</li></a>
+				<a href="#comp"><li data-u="{{ route('login.comp') }}" class="login-form ">مؤسسة أو شركة</li></a>
+                            </ul>
                             <div>
-
-                                <h1>تسجيل الدخول كـَ متطوع</h1>
-                                <h6>ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــ</h6>
-                                <form action="@yield('route')">
+				<br><br><br>
+				<h1>تسجيل الدخول</h1>
+				<form onsubmit="return false;" ng-controller="loginController">
+				    <input id="login-tp" type="hidden" value="{{ route('login.user') }}"/>
 				    {{ csrf_field() }}
-                                    <br><br><br><br>
-                                    <div>
-                                        <div class="hex1 hexagon-wrapper">
-                                            <div class="hexagon">
-                                                <i class="fa fa-envelope" aria-hidden="true"></i>
-                                            </div>
-                                        </div>
-                                        <input name="email" type="text" placeholder="البريد الإلكتروني">
-                                    </div>
-                                    <div>
+				    <br><br><br>
+				    <div>
+					<div class="hex1 hexagon-wrapper">
+					    <div class="hexagon">
+						<i class="fa fa-envelope" aria-hidden="true"></i>
+					    </div>
+					</div>
+					<input ng-model="email" type="text" placeholder="البريد الإلكتروني">
+				    </div>
+				    <div>
 
-                                        <div class="hex1 hexagon-wrapper">
-                                            <div class="hexagon">
-                                                <i class="fa fa-lock" aria-hidden="true"></i>
-                                            </div>
-                                        </div>
-                                        <input name="password" type="text" placeholder="كلمة المرور">
-                                    </div>
-                                    <div class="remember-password">
+					<div class="hex1 hexagon-wrapper">
+					    <div class="hexagon">
+						<i class="fa fa-lock" aria-hidden="true"></i>
+					    </div>
+					</div>
+					<input ng-model="password" type="password" placeholder="كلمة المرور">
+				    </div>
+				    <div class="remember-password">
 
-                                        <div>
-                                            <input id="remember-me" type="radio">
-                                            <label for="remember-me">
+					<div>
+					    <input id="remember-me" type="radio">
+					    <label for="remember-me">
 						<div class="hex3 hexagon-wrapper">
 						    <div  class="hexagon">
 							
 						    </div>
 						</div>
-                                            </label>
-                                        </div>
-                                        <div>
-                                            <h4>تذكر كلمة المرور</h4>
-                                        </div>
-                                    </div>
-                                    <div class="clear"></div>
-                                    <div class="login-button">
-                                        <input type="button" value="تسجيل الدخول">
-                                    </div>
+					    </label>
+					</div>
+					<div>
+					    <h4>تذكر كلمة المرور</h4>
+					</div>
+				    </div>
+				    <div class="clear"></div>
+				    <div class="login-button">
+					<input ng-click="login()" type="button" value="تسجيل الدخول">
+				    </div>
 
-                                </form>
-                                <div class="clear"></div>
+				</form>
+				<div class="clear"></div>
 
 
-                                <div class="forget-password">
+				<div class="forget-password">
                                     <h3>نسيت كلمة المرور؟</h3>
-                                </div>
-                                <br>
-                                <div class="register-new">
+				</div>
+				<br>
+				<div class="register-new">
                                     <h3>لست عضواً في المنصة بعد؟</h3>
                                     <h3>سجّل كـ :</h3>
-                                    
+
                                     <ul>
-                                        <a href="">
+					<a href="">
                                             <li>
-                                                <div class="hex30 hexagon-wrapper">
+						<div class="hex30 hexagon-wrapper">
                                                     <div class="hexagon">
-                                                        <div>
+							<div>
                                                             <h3>متطوع</h3>
-                                                        </div>
+							</div>
                                                     </div>
-                                                </div>
+						</div>
                                             </li>
-                                        </a>
-                                        <a href="">
+					</a>
+					<a href="">
                                             <li>
-                                                <div class="hex30 hexagon-wrapper">
+						<div class="hex30 hexagon-wrapper">
                                                     <div class="hexagon">
-                                                        <div>
-                                                            <h3>مؤسسة مانحة</h3>
-                                                        </div>
+							<div>
+                                                            <h3>مؤسسة</h3>
+							</div>
                                                     </div>
-                                                </div>
+						</div>
                                             </li>
-                                        </a>
-                                        <a href="">
-                                            <li>
-                                                <div class="hex30 hexagon-wrapper">
-                                                    <div class="hexagon">
-                                                        <div>
-                                                            <h3>مؤسسة مستفيدة</h3>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </a>
+					</a>
+					
                                     </ul>
-                                </div>
+				</div>
                             </div>
-                        </div>
-			<!-- <img src="img/logo.png"> -->
+			</div>
                     </div>
 		</div>
             </div>
-            <nav>
-		<ul>
-                    <li><i class="fa fa-home" aria-hidden="true"></i>الرئيسية</li>
-                    <li>اتصل بنا</li>
-                    <li>من نحن</li>
-                    <li>مشاريعنا</li>
-                    <li>عن التطوع</li>
-                    <li>لماذا مداد؟</li>
-                    <li>الأعضاء</li>
-		</ul>
-            </nav>
 	</section>
 	<br>
 	@yield('content')
@@ -235,6 +215,13 @@
 	<script src="js/npm.js"></script>
 	<script src="js/wow.min.js"></script>
 	<script src="js/main.js"></script>
+	<script src="js/angular_apps.js"></script>
     </body>
-
+    <script>
+     $('.login-form').on('click', function(){
+	 $('li.login-form').removeClass('active-login');
+	 $(this).addClass('active-login');
+	 $("#login-tp").val($(this).data('u'));
+     });
+    </script>
 </html>

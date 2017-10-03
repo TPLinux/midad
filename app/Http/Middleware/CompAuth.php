@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Auth;
-class BeneAuth
+class CompAuth
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,10 @@ class BeneAuth
     public function handle($request, Closure $next)
     {
         
-        if (Auth::guard('bene')->check()) {
-            // return redirect('/bened');
+        if (Auth::guard('comp')->check()) {
+            // return redirect('/donerd');
         }else{
-            return redirect('/bene-login');
+            return redirect('/');
         }
         return $next($request);
     }

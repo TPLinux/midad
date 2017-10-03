@@ -56,24 +56,14 @@ return [
             'provider' => 'admins',
         ],
 
-        'doner' => [
+        'comp' => [
             'driver' => 'session',
-            'provider' => 'doners',
+            'provider' => 'comps',
         ],
 
-        'doner-api' => [
+        'comp-api' => [
             'driver' => 'token',
-            'provider' => 'doners',
-        ],
-
-        'bene' => [
-            'driver' => 'session',
-            'provider' => 'benes',
-        ],
-
-        'bene-api' => [
-            'driver' => 'token',
-            'provider' => 'benes',
+            'provider' => 'comps',
         ],
     ],
 
@@ -105,14 +95,9 @@ return [
             'model' => App\Admin::class,
         ],
 
-        'doners' => [
+        'comps' => [
             'driver' => 'eloquent',
-            'model' => App\DonerCompany::class,
-        ],
-
-        'benes' => [
-            'driver' => 'eloquent',
-            'model' => App\BeneCompany::class,
+            'model' => App\Company::class,
         ],
         // 'users' => [
         //     'driver' => 'database',
@@ -147,13 +132,8 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
         ],
-        'doners' => [
-            'provider' => 'doners',
-            'table' => 'password_resets',
-            'expire' => 60,
-        ],
-        'benes' => [
-            'provider' => 'benes',
+        'comps' => [
+            'provider' => 'comps',
             'table' => 'password_resets',
             'expire' => 60,
         ],

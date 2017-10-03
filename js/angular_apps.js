@@ -3,16 +3,10 @@ var registerApp = angular.module('registerApp', [], function($interpolateProvide
     $interpolateProvider.endSymbol('%>');
 });
 
-var donerRegisterApp = angular.module('donerRegisterApp', [], function($interpolateProvider){
+var compRegisterApp = angular.module('compRegisterApp', [], function($interpolateProvider){
     $interpolateProvider.startSymbol('<%');
     $interpolateProvider.endSymbol('%>');
 });
-
-var beneRegisterApp = angular.module('beneRegisterApp', [], function($interpolateProvider){
-    $interpolateProvider.startSymbol('<%');
-    $interpolateProvider.endSymbol('%>');
-});
-
 /*
   registerApp.config(['$qProvider', function ($qProvider) {
   $qProvider.errorOnUnhandledRejections(false);
@@ -61,26 +55,27 @@ registerApp.controller('registerController', ['$scope', '$http', function($scope
     
 }]);
 
-// doners
-donerRegisterApp.controller('donerRegisterController', ['$scope', '$http', function($scope, $http){
+
+// companies
+compRegisterApp.controller('compRegisterController', ['$scope', '$http', function($scope, $http){
 
     $scope.register = function(){
 
-	if($scope.password !== $scope.password2){
+	if($scope.comp_password !== $scope.comp_password2){
 	    alert('password not match');
 	}else{
 	    var formData = {
-		doner_name: $scope.name,
-		doner_phone: $scope.phone,
-		doner_email: $scope.email,
-		doner_password: $scope.password,
-		doner_manager: $scope.manager,
-		doner_owner: $scope.owner,
+		comp_name: $scope.comp_name,
+		comp_phone: $scope.comp_phone,
+		comp_email: $scope.comp_email,
+		comp_password: $scope.comp_password,
+		comp_manager: $scope.comp_manager,
+		comp_owner: $scope.comp_owner,
 	    };
-
+	    console.log(formData);
 	    var regRequest = $http({
 		method: 'POST',
-		url: 'doner-register',
+		url: 'comp-register',
 		data: formData
 	    });
 
@@ -105,47 +100,3 @@ donerRegisterApp.controller('donerRegisterController', ['$scope', '$http', funct
     
 }]);
 
-
-// bene
-beneRegisterApp.controller('beneRegisterController', ['$scope', '$http', function($scope, $http){
-
-    $scope.register = function(){
-
-	if($scope.password !== $scope.password2){
-	    alert('password not match');
-	}else{
-	    var formData = {
-		bene_name: $scope.name,
-		bene_phone: $scope.phone,
-		bene_email: $scope.email,
-		bene_password: $scope.password,
-		bene_manager: $scope.manager,
-		bene_owner: $scope.owner,
-	    };
-
-	    var regRequest = $http({
-		method: 'POST',
-		url: 'bene-register',
-		data: formData
-	    });
-
-	    regRequest.then(function(resp){
-		if(resp.status === 200){
-		    $scope.regErrors = resp.data.errors;
-		    if(resp.data.status == true){
-			console.log(resp.data.msg);
-			$scope.greenMsg = resp.data.msg;
-		    }else{
-			$scope.greenMsg = null;
-		    }
-		}
-	    }).catch(function(err){
-		$scope.regErrors = err.data.errors;
-		for(var x in err.data.errors){
-		    console.log(err.data.errors[x]);
-		}
-	    });;
-	}
-    }
-    
-}]);

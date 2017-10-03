@@ -15,6 +15,12 @@ font-family: 'Amatic SC', cursive;
 font-family: 'Cairo', sans-serif;
 font-family: 'Reem Kufi', sans-serif;
 font-family: 'Lateef', cursive;*/
+/* HEXAGON SHAPE */ 
+ 
+
+
+
+
 *{
     padding:0;
     margin: 0;
@@ -33,21 +39,88 @@ li{
     list-style: none;
 }
 
+.clear{
+    margin:0;
+    padding:0;
+    clear: both;
+}
+/****** HEXAGON *****/
+.hex1 {
+  width: 25px;
+  height: 25px;
+}
+.hex3{
+    width: 15px;
+  height: 15px;
+}
+.hex30{
+    width: 60px;
+  height: 60px;
+}
+.hexagon-wrapper {
+    margin:0;
+  text-align: center;
+  position: relative;
+  display: inline-block;
+    text-align: center;
+}
 
+.hexagon {
+    border-top: 0.5px solid white;
+    border-bottom: 0.5px solid white;
+  height: 100%;
+  width: calc(100% * 0.57735);
+  display: inline-block;
+    
+}
+
+.hexagon:before {
+    border-top: 0.5px solid white;
+    border-bottom: 0.5px solid white;
+  position: absolute;
+  top: 0;
+  right: calc((100% / 2) - ((100% * 0.57735) / 2));
+  background-color: inherit;
+  height: inherit;
+  width: inherit;
+  content: '';
+  transform: rotateZ(60deg);
+z-index: -1;
+}
+
+.hexagon:after {
+    border-top: 0.5px solid white;
+    border-bottom: 0.5px solid white;
+  position: absolute;
+  top: 0;
+  right: calc((100% / 2) - ((100% * 0.57735) / 2));
+  background-color: inherit;
+  height: inherit;
+  width: inherit;
+  content: '';
+  transform: rotateZ(-60deg);
+    z-index: -1;
+}
+
+.hexagon>i{
+    line-height: 1.6;
+}
+/* HEXAGON SHAPE */ 
 .header{
-    height: 600px;
+    height:780px;
     width:100%;
-    background-image: url(../img/header.jpg);
-    background-size: cover;
+    /*background-image: url(../img/header.jpg);
+    background-size: cover;*/ 
     padding:0;
     position: relative;
+    overflow: hidden;
 }
 .header>div:nth-child(1){
     width: 100%;
     height: 100%;
     margin: 0;
     padding:0;
-    background-color:rgba(0,0,0,1);
+    background-color:rgba(0,0,0,0,1);
     position: absolute;
     left: 0;
     top:0;
@@ -67,25 +140,192 @@ li{
 .header>div:nth-child(2)>.container>.row>ul>li{
     display: inline-block;
 }
-.header>div:nth-child(2)>.container>.row>ul>li:nth-child(1)>input{
-    color:white;
-    background: #e52d2d;
-    border:none;
-    padding:10px;
-}
-.header>div:nth-child(2)>.container>.row>ul>li:nth-child(2)>input{
-    color:white;
-    background: #00c444;
-    border:none;
-    padding:10px;
 
-}
-.header>div:nth-child(2)>.container>.row>ul>li:nth-child(3){
+.header>div:nth-child(2)>.container>.row>ul>li{
     color:white;
     border:1px solid white;
     padding:9px;
     direction: ltr;
 }
+
+.header>div:nth-child(2)>.container>.row>.home-login{
+    
+    width: 300px;
+    height: 550px;
+    background: rgba(0,0,0,0.7);
+    z-index: 99999;
+    
+    padding:5px;
+    color:white;
+    
+}
+.header>div:nth-child(2)>.container>.row>.home-login>div{
+    border:0.3px gray solid;
+    width: 100%;
+    height: 100%;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+.header>div:nth-child(2)>.container>.row>.home-login>div>h1{
+    margin:0 auto;
+    padding:8px;
+    font-size: 19px;
+    text-align: center;
+    margin-top: 20px;
+}
+.header>div:nth-child(2)>.container>.row>.home-login>div>h6{
+    text-align: center;
+    margin:0
+}
+.header>div:nth-child(2)>.container>.row>.home-login>div>form{
+    padding:0;
+    margin:0;
+    text-align: center
+}
+.header>div:nth-child(2)>.container>.row>.home-login>div>form>div>input{
+    background: none;
+    border:none;
+    outline:none;
+    border-bottom: 1px solid rgba(255,255,255,0.8);
+    display:block;
+    width: 100%;
+    padding:8px;
+    padding-bottom: 7px;
+    margin-bottom: 10px;
+    margin:10px auto;
+    direction: ltr;
+    padding-left: 50px;
+}
+.header>div:nth-child(2)>.container>.row>.home-login>div>form>div{
+    position: relative;
+}
+.header>div:nth-child(2)>.container>.row>.home-login>div>form>div>.hex1{
+    position: absolute;
+    top:5px;
+    left:0px;
+}
+
+.header>div:nth-child(2)>.container>.row>.home-login>div>form>.remember-password{
+    margin-top: 10px;
+    text-align: right;
+}
+
+.header>div:nth-child(2)>.container>.row>.home-login>div>form>.remember-password>div{
+    float: right;
+    padding:5px;
+    text-align: center;
+    
+}
+
+.header>div:nth-child(2)>.container>.row>.home-login>div>form>.remember-password>div>h4{
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 100;
+}
+.header>div:nth-child(2)>.container>.row>.home-login>div>form>.remember-password>div:nth-child(1){
+    padding-top:15px;
+    
+}
+.header>div:nth-child(2)>.container>.row>.home-login>div>form>.remember-password>div>input{
+    display: none;
+}
+
+.header>div:nth-child(2)>.container>.row>.home-login>div>form>.remember-password>div>input + label .hexagon{
+    transition: all ease 0.5s;
+    cursor: pointer;
+}
+.header>div:nth-child(2)>.container>.row>.home-login>div>form>.remember-password>div>input[type="radio"]:checked + label .hexagon{
+    background: rgba(137, 137, 137,0.7);
+}
+
+
+.header>div:nth-child(2)>.container>.row>.home-login>div>form>.login-button>input{
+    text-align: center;
+    margin:0;
+    height: 40px;
+    padding:7px;
+    border:0;
+    background: rgb(216, 36, 36);
+    transition: all ease 0.3s;
+    
+}
+.header>div:nth-child(2)>.container>.row>.home-login>div>form>.login-button>input:hover{
+    color: rgb(216, 36, 36);
+    background: rgb(255, 255, 255);
+    border: 1px solid rgb(216, 36, 36);
+}
+
+.header>div:nth-child(2)>.container>.row>.home-login>div>.forget-password>h3{
+    font-size: 13px;
+    color:rgb(209, 209, 209);
+    cursor: pointer;
+    transition: all ease 0.5s;
+}
+.header>div:nth-child(2)>.container>.row>.home-login>div>.forget-password>h3:hover{
+    color:white;
+}
+
+.header>div:nth-child(2)>.container>.row>.home-login>div>.register-new>h3{
+        text-align: center;
+    font-size: 14px;
+    margin:0;
+    margin-bottom: 5px;
+}
+.header>div:nth-child(2)>.container>.row>.home-login>div>.register-new>ul{
+    text-align: center;
+    margin-top: 10px;
+}
+.header>div:nth-child(2)>.container>.row>.home-login>div>.register-new>ul>a{
+    color:white;    
+    text-decoration: none;
+}
+.header>div:nth-child(2)>.container>.row>.home-login>div>.register-new>ul>a:hover{
+    text-decoration: none;
+}
+.header>div:nth-child(2)>.container>.row>.home-login>div>.register-new>ul>a>li{
+    display: inline-block;
+    margin: 0 10px;
+    float:right;
+}
+
+.header>div:nth-child(2)>.container>.row>.home-login>div>.register-new>ul>a:nth-child(1)>li>.hex30>div:hover{
+    background: red;
+    border:none !important;
+}
+.header>div:nth-child(2)>.container>.row>.home-login>div>.register-new>ul>a:nth-child(1)>li>.hex30>div:hover:before{
+    border:none;
+}
+.header>div:nth-child(2)>.container>.row>.home-login>div>.register-new>ul>a:nth-child(1)>li>.hex30>div:hover:after{
+    border:none;
+}
+
+.header>div:nth-child(2)>.container>.row>.home-login>div>.register-new>ul>a>li>.hex30>div>div{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+    text-align: center;
+    
+}
+.header>div:nth-child(2)>.container>.row>.home-login>div>.register-new>ul>a>li>.hex30>div>div>h3{
+    height: 30px;
+    font-size: 10px;
+    color:white ;
+    vertical-align: center;
+    padding-top:5px;
+    position: absolute;
+    top:0;
+    left:0;
+    right: 0;
+    bottom: 0;
+    margin:auto;
+    
+}
+
+
+
+/************ END LOGIN **************/
+
 .header>div:nth-child(2)>.container>.row>img{
     width: 300px;
 }
@@ -104,31 +344,100 @@ li{
 .header>nav>ul{
     margin:0;
     padding:0;
+    background: rgba(0,0,0,.7);
 }
 .header>nav>ul>li{
     display: inline-block;
     color:white;
     margin:0 15px;
     cursor: pointer;
-    padding:10px;
+    padding:13px;
     transition: all ease 0.4s;
 }
 .header>nav>ul>li:nth-child(1){
-    background: rgba(255,255,255,0.9);
+    background: rgba(255,255,255,1);
     color:black;
 }
 .header>nav>ul>li:hover{
-    background: rgba(255,255,255,0.9);
+    background: rgba(255,255,255,1);
     color:black;
 }
+
+/************** Latest Volunteer *********************/
+.volunteer-section>.container>.row>div{
+    float:right;
+}
+.volunteer-section>.container>.row>div>div{
+    border-radius: 4px;
+    box-shadow: 1px 1px 20px gray;
+    overflow: hidden;
+}
+.volunteer-section>.container>.row>div>div>div:nth-child(1){
+    padding:10px;
+    height: 200px;
+    background-image: linear-gradient(to top, #1e3c72 0%, #1e3c72 1%, #2a5298 100%);
+    color:white;
+}
+.volunteer-section>.container>.row>div>div>div:nth-child(1)>h1{
+    font-size: 22px;
+    margin:0;
+}
+.volunteer-section>.container>.row>div>div>div:nth-child(1)>h5{
+    text-align: center;
+    padding:5px;
+    float: left;
+    cursor: pointer;
+    border:0.5px solid white;
+    width: 100px;
+    clear: both;
+    
+}
+.volunteer-section>.container>.row>div>div>div:nth-child(1)>p{
+    line-height: 1;
+    margin-top:5px;
+}
+
+.volunteer-section>.container>.row>div>div>div:nth-child(1)>h2{
+    margin:0;
+    margin-top: 10px;
+    font-size: 19px;
+    background: white;
+    color:#1e3c72;
+    padding:5px;
+    
+}
+.volunteer-section>.container>.row>div>div>div:nth-child(2){
+    background: #f7f7f7;
+    height: 70px;
+    
+}
+.volunteer-section>.container>.row>div>div>div:nth-child(2)>ul{
+    text-align: center;
+}
+.volunteer-section>.container>.row>div>div>div:nth-child(2)>ul>li{
+    display: inline-block;
+    margin: 10px 7px;
+    font-size: 12px;
+    
+}
+.volunteer-section>.container>.row>div>div>div:nth-child(2)>ul>li>span{
+    display: block;
+    color:white;
+    margin-top:6px;
+    background: #1e3c72;
+    padding:2px;
+    font-size: 15px;
+    border-radius: 4px;
+    padding:5px;
+}
+/************** Latest Volunteer *********************/ 
+
 /************** BEST USER RANK*********************/
 .user-section{
     margin: 50px 0;
 }
-.user-section>.container>h1{
+.container>h1{
     font-size: 22px;
-    
-    text-underline-position: under;
     line-height: 1;
     margin-bottom: 40px;
     
@@ -183,13 +492,12 @@ li{
 }
 
 .container .row .user-profile>div>div:nth-child(2){
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     background-position: center;
     background-size: cover;
     border-radius: 50%;
     position: absolute;
-    box-shadow: -2px 2px 10px gray;
     left:0;
     right: 0;
     margin:-25px auto;
@@ -347,3 +655,4 @@ footer>div>div>div>div>img{
     
 }
 /************** Footer *********************/
+

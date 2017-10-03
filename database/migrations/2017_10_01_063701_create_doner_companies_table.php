@@ -13,18 +13,18 @@ class CreateDonerCompaniesTable extends Migration
      */
     public function up()
     {
-        Schema::create('doner_companies', function (Blueprint $table) {
-            $table->increments('doner_comp_id');
-            $table->string('doner_comp_name');
-            $table->string('doner_comp_phone');
-            $table->string('doner_comp_email')->unique();
-            $table->string('doner_comp_password');
-            $table->string('doner_comp_place')->default('');
-            $table->string('doner_comp_manager');
-            $table->string('doner_comp_owner');
-            $table->string('doner_comp_logo')->default('');
-            $table->float('doner_comp_latitude')->default(0.0);
-            $table->float('doner_comp_longtude')->default(0.0);
+        Schema::create('companies', function (Blueprint $table) {
+            $table->increments('comp_id');
+            $table->string('comp_name');
+            $table->string('comp_phone');
+            $table->string('comp_email')->unique();
+            $table->string('comp_password');
+            $table->string('comp_place')->default('');
+            $table->string('comp_manager');
+            $table->string('comp_owner');
+            $table->string('comp_logo')->default('');
+            $table->float('comp_latitude')->default(0.0);
+            $table->float('comp_longtude')->default(0.0);
             $table->rememberToken();
             $table->timestamps();
         });

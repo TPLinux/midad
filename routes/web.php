@@ -48,24 +48,27 @@ Route::post('/admin-login',[
 Route::get('admind', [
     'middleware' => 'admin',
     'uses' => function(){
-        echo var_dump(Auth::guard('admin')->user());
-        echo 'admin panel';
+        $admin = Auth::guard('admin')->user();
+        echo '<h2>Admin panel</h2>';
+        echo "Your email is: " . $admin->admin_email;
     }
 ]);
 
 Route::get('compd', [
     'middleware' => 'comp',
     'uses' => function(){
-        echo var_dump(Auth::guard('comp')->user());
-        echo 'Comp panel';
+        $comp = Auth::guard('comp')->user();
+        echo '<h2>Comp panel</h2>';
+        echo "Your email is: " . $comp->comp_email;
     }
 ])->name('compd');
 
 Route::get('userd', [
     'middleware' => 'auth',
     'uses' => function(){
-        echo var_dump(Auth::user());
-        echo 'user panel';
+        $user = Auth::user();
+        echo '<h2>User panel</h2>';
+        echo "Your email is: " . $user->u_email;
     }
 ])->name('userd');
 

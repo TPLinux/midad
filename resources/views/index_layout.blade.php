@@ -24,96 +24,98 @@
 				<li>+90 555 331 55 55</li>
                             </ul>
 			</div>
-			<div class="home-login">
-			    <ul>
-				<a href="#user"><li data-u="{{ route('login.user') }}" class="login-form active-login">متطوع</li></a>
-				<a href="#comp"><li data-u="{{ route('login.comp') }}" class="login-form ">مؤسسة أو شركة</li></a>
-                            </ul>
-                            <div>
-				<br><br><br>
-				<h1>تسجيل الدخول</h1>
-				<form onsubmit="return false;" ng-controller="loginController">
-				    <input id="login-tp" type="hidden" value="{{ route('login.user') }}"/>
-				    {{ csrf_field() }}
+			@if($user_in != true)
+			    <div class="home-login">
+				<ul>
+				    <a href="#user"><li data-u="{{ route('login.user') }}" class="login-form active-login">متطوع</li></a>
+				    <a href="#comp"><li data-u="{{ route('login.comp') }}" class="login-form ">مؤسسة أو شركة</li></a>
+				</ul>
+				<div>
 				    <br><br><br>
-				    <div>
-					<div class="hex1 hexagon-wrapper">
-					    <div class="hexagon">
-						<i class="fa fa-envelope" aria-hidden="true"></i>
-					    </div>
-					</div>
-					<input ng-model="email" type="text" placeholder="البريد الإلكتروني">
-				    </div>
-				    <div>
-
-					<div class="hex1 hexagon-wrapper">
-					    <div class="hexagon">
-						<i class="fa fa-lock" aria-hidden="true"></i>
-					    </div>
-					</div>
-					<input ng-model="password" type="password" placeholder="كلمة المرور">
-				    </div>
-				    <div class="remember-password">
-
+				    <h1>تسجيل الدخول</h1>
+				    <form onsubmit="return false;" ng-controller="loginController">
+					<input id="login-tp" type="hidden" value="{{ route('login.user') }}"/>
+					{{ csrf_field() }}
+					<br><br><br>
 					<div>
-					    <input id="remember-me" type="radio">
-					    <label for="remember-me">
-						<div class="hex3 hexagon-wrapper">
-						    <div  class="hexagon">
-							
+					    <div class="hex1 hexagon-wrapper">
+						<div class="hexagon">
+						    <i class="fa fa-envelope" aria-hidden="true"></i>
+						</div>
+					    </div>
+					    <input ng-model="email" type="text" placeholder="البريد الإلكتروني">
+					</div>
+					<div>
+
+					    <div class="hex1 hexagon-wrapper">
+						<div class="hexagon">
+						    <i class="fa fa-lock" aria-hidden="true"></i>
+						</div>
+					    </div>
+					    <input ng-model="password" type="password" placeholder="كلمة المرور">
+					</div>
+					<div class="remember-password">
+
+					    <div>
+						<input id="remember-me" type="radio">
+						<label for="remember-me">
+						    <div class="hex3 hexagon-wrapper">
+							<div  class="hexagon">
+							    
+							</div>
 						    </div>
-						</div>
-					    </label>
+						</label>
+					    </div>
+					    <div>
+						<h4>تذكر كلمة المرور</h4>
+					    </div>
 					</div>
-					<div>
-					    <h4>تذكر كلمة المرور</h4>
+					<div class="clear"></div>
+					<div class="login-button">
+					    <input ng-click="login()" type="button" value="تسجيل الدخول">
 					</div>
-				    </div>
+
+				    </form>
 				    <div class="clear"></div>
-				    <div class="login-button">
-					<input ng-click="login()" type="button" value="تسجيل الدخول">
+
+
+				    <div class="forget-password">
+					<h3>نسيت كلمة المرور؟</h3>
 				    </div>
+				    <br>
+				    <div class="register-new">
+					<h3>لست عضواً في المنصة بعد؟</h3>
+					<h3>سجّل كـ :</h3>
 
-				</form>
-				<div class="clear"></div>
-
-
-				<div class="forget-password">
-                                    <h3>نسيت كلمة المرور؟</h3>
-				</div>
-				<br>
-				<div class="register-new">
-                                    <h3>لست عضواً في المنصة بعد؟</h3>
-                                    <h3>سجّل كـ :</h3>
-
-                                    <ul>
-					<a href="">
-                                            <li>
-						<div class="hex30 hexagon-wrapper">
-                                                    <div class="hexagon">
-							<div>
-                                                            <h3>متطوع</h3>
+					<ul>
+					    <a href="">
+						<li>
+						    <div class="hex30 hexagon-wrapper">
+							<div class="hexagon">
+							    <div>
+								<h3>متطوع</h3>
+							    </div>
 							</div>
-                                                    </div>
-						</div>
-                                            </li>
-					</a>
-					<a href="">
-                                            <li>
-						<div class="hex30 hexagon-wrapper">
-                                                    <div class="hexagon">
-							<div>
-                                                            <h3>مؤسسة</h3>
+						    </div>
+						</li>
+					    </a>
+					    <a href="">
+						<li>
+						    <div class="hex30 hexagon-wrapper">
+							<div class="hexagon">
+							    <div>
+								<h3>مؤسسة</h3>
+							    </div>
 							</div>
-                                                    </div>
-						</div>
-                                            </li>
-					</a>
-					
-                                    </ul>
+						    </div>
+						</li>
+					    </a>
+					    
+					</ul>
+				    </div>
 				</div>
-                            </div>
-			</div>
+			    </div>
+			@endif
                     </div>
 		</div>
             </div>

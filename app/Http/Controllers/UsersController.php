@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use Auth;
 use App;
 
 class UsersController extends Controller
@@ -14,11 +13,11 @@ class UsersController extends Controller
     }
 
     public function register(){
-        return view('register');
+        return view('register')->with('user_in', $this->user_in);
     }
 
     public function login(){
-        return view('login');
+        return view('login')->with('user_in', $this->user_in);
     }
 
     public function loginPost(Request $req){
@@ -27,10 +26,17 @@ class UsersController extends Controller
         if($auth){
             Auth::login($auth, true);
             // return redirect('userd');
-            return "wow";
+            return [
+                'status' => true,
+                'panel' => route('userd'),
+                'msg' => 'Logged in!!'
+            ];
             
         }else{
-            echo "Invalid login";
+            return [
+                'status' => false,
+                'msg' => 'Unable To login, Password or email not correct'
+            ];
         }
     }
     

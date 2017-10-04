@@ -11,7 +11,7 @@ use App;
 class AdminController extends Controller
 {
     public function login(){
-        return view('admin-login');
+        return view('admin-login')->with('user_in', $this->user_in);
     }
 
     public function loginPost(Request $req){

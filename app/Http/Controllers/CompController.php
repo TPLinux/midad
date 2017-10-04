@@ -11,7 +11,7 @@ use App;
 class CompController extends Controller
 {    
     public function login(){
-        return view('comps.login');
+        return view('comps.login')->with('user_in', $this->user_in);;
     }
 
     public function loginPost(Request $req){
@@ -20,15 +20,23 @@ class CompController extends Controller
         // die();
         if($auth){
             Auth::guard('comp')->login($auth, true);
-            return redirect('compd');
+            // return redirect('compd');
+            return [
+                'status' => true,
+                'panel' => route('compd'),
+                'msg' => 'Logged in!!'
+            ];
             
         }else{
-            echo "Invalid login";
+            return [
+                'status' => false,
+                'msg' => 'Unable To login, Password or email not correct'
+            ];
         }
     }
     
     public function register(){
-        return view('comps.register');
+        return view('comps.register')->with('user_in', $this->user_in);;
     }
 
     public function registerPost(){

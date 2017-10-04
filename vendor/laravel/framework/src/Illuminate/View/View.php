@@ -13,6 +13,7 @@ use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\Support\MessageProvider;
 use Illuminate\Contracts\View\View as ViewContract;
+use Auth;
 
 class View implements ArrayAccess, ViewContract
 {
@@ -67,7 +68,6 @@ class View implements ArrayAccess, ViewContract
         $this->path = $path;
         $this->engine = $engine;
         $this->factory = $factory;
-
         $this->data = $data instanceof Arrayable ? $data->toArray() : (array) $data;
     }
 

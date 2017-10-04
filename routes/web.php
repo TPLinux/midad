@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/','IndexController@index');
 
 Route::get('/lang/{locale}',[
     'uses' => 'LanguageController@switchLang',
@@ -60,7 +59,7 @@ Route::get('compd', [
         echo var_dump(Auth::guard('comp')->user());
         echo 'Comp panel';
     }
-]);
+])->name('compd');
 
 Route::get('userd', [
     'middleware' => 'auth',
@@ -68,20 +67,20 @@ Route::get('userd', [
         echo var_dump(Auth::user());
         echo 'user panel';
     }
-]);
+])->name('userd');
 
 Route::post('/logout', function(){
     Auth::guard('comp')->logout();
     Auth::guard('admin')->logout();
     Auth::logout();
-    return redirect('/admin-login');
+    return redirect('/');
 })->name('logout');
 
 Route::get('/logout', function(){
     Auth::guard('comp')->logout();
     Auth::guard('admin')->logout();
     Auth::logout();
-    return redirect('/admin-login');
+    return redirect('/');
 })->name('logout');
 
 ?>

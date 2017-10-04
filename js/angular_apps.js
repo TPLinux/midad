@@ -115,7 +115,14 @@ app.controller('loginController', ['$scope', '$http', function($scope, $http){
 
 	loginRequest.then(function(resp){
 	    if(resp.status === 200){
-		console.log(resp);
+		var info = resp.data;
+		if(info.status == true){
+		    alert(info.msg);
+		    window.location.href = info.panel;
+		}else{
+		    alert(info.msg);
+		}
+		    
 	    }
 	}).catch(function(err){
 	    console.log(err);

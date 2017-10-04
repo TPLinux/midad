@@ -12,7 +12,7 @@
 */
 
 
-Route::get('/','IndexController@index');
+Route::get('/','IndexController@index')->name('index');
 
 Route::get('/lang/{locale}',[
     'uses' => 'LanguageController@switchLang',
@@ -44,13 +44,22 @@ Route::post('/admin-login',[
     'as' => 'login.admin'
 ]);
 
-
+/*
+ * #**********NOTE************#
+ * # these is testing routes  #
+ * # we will generate         #
+ * # fucntions for thiese     #
+ * # routes                   #
+ * #**************************#
+ */
 Route::get('admind', [
     'middleware' => 'admin',
     'uses' => function(){
         $admin = Auth::guard('admin')->user();
         echo '<h2>Admin panel</h2>';
         echo "Your email is: " . $admin->admin_email;
+        echo "<br/>";
+        echo '<a href="'. route('logout') .'">Logout</a>';
     }
 ]);
 
@@ -60,6 +69,8 @@ Route::get('compd', [
         $comp = Auth::guard('comp')->user();
         echo '<h2>Comp panel</h2>';
         echo "Your email is: " . $comp->comp_email;
+        echo "<br/>";
+        echo '<a href="'. route('logout') .'">Logout</a>';
     }
 ])->name('compd');
 
@@ -69,6 +80,8 @@ Route::get('userd', [
         $user = Auth::user();
         echo '<h2>User panel</h2>';
         echo "Your email is: " . $user->u_email;
+        echo "<br/>";
+        echo '<a href="'. route('logout') .'">Logout</a>';
     }
 ])->name('userd');
 

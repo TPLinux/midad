@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
-
+use Flash;
 class IndexController extends Controller
 {
     public function index(){
@@ -13,7 +13,7 @@ class IndexController extends Controller
             $user_in = true;
         else
             $user_in = false;
-
+        
         return view('welcome')->with('user_in', $user_in);
     }
 }

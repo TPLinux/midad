@@ -51,6 +51,10 @@ a:hover{
     padding:0;
     clear: both;
 }
+
+.hide-form{
+    display: none;
+}
 /* HEXAGON SHAPE */ 
 .hex1 {
   width: 25px;
@@ -63,6 +67,10 @@ a:hover{
 .hex30{
     width: 60px;
   height: 60px;
+}
+.hex80{
+    width: 80px;
+  height: 80px;
 }
 .hexagon-wrapper {
     margin:0;
@@ -115,7 +123,46 @@ z-index: -1;
 .hexagon>i{
     line-height: 1.6;
 }
-/* HEXAGON SHAPE */ 
+
+/***********END HEXAGON SHAPE ************/ 
+
+/**************START SELECT STYLE ****************/
+.selectsearch .input-active:before{
+    background: red;
+}
+.selectize-input{
+    margin:0 !important;
+    width: 100%;
+    border-radius: 0;
+    background: transparent;
+    border:none;
+    text-align: right;
+    border-bottom: 1px solid rgba(255,255,255,0.8);
+    padding:10px;
+}
+.selectize-input.full{
+    background: transparent;;
+    color:white;
+}
+.selectize-dropdown .active{
+    background:   rgb(249, 149, 0);
+    color : white;
+}
+.selectize-input:after{
+    left: 4px !important;
+    right: auto;
+}
+.selectize-input input{
+    width:200px !important;
+}
+.selectize-dropdown{
+    background: white;
+    color:rgba(0, 0, 0,0.9);     
+    outline: none;
+    border:none;
+    backface-visibility: hidden;
+}
+/**************END SELECT STYLE ****************/
 .header{
     height:700px;
     width:100%;
@@ -143,46 +190,109 @@ z-index: -1;
 }
 .header>div:nth-child(2){
     position: relative;
-    text-align: center;
     z-index: 99
 }
-.header>div:nth-child(2)>.container>.row>.firstbar{
-    background:  rgba(0,0,0,0.8);
-}
-.header>div:nth-child(2)>.container>.row>.firstbar>ul{
-   text-align: left;
-    margin-top: 20px;
+
+.header>div:nth-child(2)>.container>.firstbar{
+    background: rgba(0,0,0,0.8);
+    margin:0;
+    padding:0;
+    margin-top: 30px;
     margin-bottom: 30px;
+    
+   
 }
-.header>div:nth-child(2)>.container>.row>.firstbar>ul>li{
-    display: inline-block;
+.header>div:nth-child(2)>.container>.firstbar>div{
+    margin:0;
+    padding:0;
 }
 
-.header>div:nth-child(2)>.container>.row>.firstbar>ul>li{
+.header>div:nth-child(2)>.container>.firstbar>div>ul{
+   text-align: left;
+}
+
+.header>div:nth-child(2)>.container>.firstbar>div>ul>li{
+    display: inline-block;
+    margin-top: 9px;
+}
+
+.header>div:nth-child(2)>.container>.firstbar>div>ul>li{
     color:white;
-    border:1px solid white;
     padding:9px;
     direction: ltr;
+    cursor: pointer;
+    
 }
+.header>div:nth-child(2)>.container>.firstbar>div>ul>li:nth-child(1){
+    border-left: 1px solid white;
+}
+.header>div:nth-child(2)>.container>.firstbar>div:nth-child(2){
+    text-align: center;
+    margin:0;
+    padding:0;
+    line-height: 0.7;
+    position: relative;
+}
+.header>div:nth-child(2)>.container>.firstbar>div:nth-child(3){
+    text-align: right;
+}
+.header>div:nth-child(2)>.container>.firstbar>div:nth-child(3)>div{
+    position: absolute;
+    right:-15px;
+    top:-13px;
+    margin:auto;
+    
+}
+.header>div:nth-child(2)>.container>.firstbar>div:nth-child(3)>div>div{
+    background: rgba(255, 255, 255, 1);
+    margin:0;
+    padding:0;
+    border:0;
+    z-index: -1;
+}
+.header>div:nth-child(2)>.container>.firstbar>div:nth-child(3)>div>div:after{
+    border: none;
+    background: rgba(255, 255, 255, 0.9);
+    z-index: -1
+    
+    
+}
+.header>div:nth-child(2)>.container>.firstbar>div:nth-child(3)>div>div:before{
+    border: none;
+    background: rgba(255, 255, 255, 0.9);
+    z-index:-1
+   
+}
+.header>div:nth-child(2)>.container>.firstbar>div:nth-child(3)>div>div>img{
+    position: absolute;
+    top:0;
+    left: 0;
+    bottom: 0;
+    right:0;
+    margin:auto;
+    width: 85%;
+}
+/************** LOGIN *************/
 
-.header>div:nth-child(2)>.container>.row>.home-login{
+.home-login{
     width: 300px;
     height: 550px;
     background: rgba(0,0,0,0.8);
     z-index: 99999;
     color:white;
-    
+    float:right;
 }
-.header>div:nth-child(2)>.container>.row>.home-login>div{
+.home-login>div{
     width: 100%;
     height: 100%;
     padding-right: 20px;
     padding-left: 20px;
 }
-.header>div:nth-child(2)>.container>.row>.home-login>ul{
+.home-login>ul{
+    text-align: center;
     margin-bottom: 15px;
 }
-.header>div:nth-child(2)>.container>.row>.home-login>ul>a>li{
+.home-login>ul>a>li{
     float:right;
     background: white;
     width: 50%;
@@ -191,27 +301,34 @@ z-index: -1;
     
     
 }
-.header>div:nth-child(2)>.container>.row>.home-login>ul>a>.active-login{
+.home-login>ul>a>.active-login{
     background: rgba(0,0,0,0.0);
     color:white;
 }
-.header>div:nth-child(2)>.container>.row>.home-login>div>h1{
+.home-login>ul>a>li>input{
+    display: none;
+    
+}
+.home-login>ul>a>li>label{
+    cursor: pointer;
+}
+.home-login>div>h1{
     margin:0 auto;
     padding:8px;
     font-size: 19px;
     text-align: center;
    
 }
-.header>div:nth-child(2)>.container>.row>.home-login>div>h6{
+.home-login>div>h6{
     text-align: center;
     margin:0
 }
-.header>div:nth-child(2)>.container>.row>.home-login>div>form{
+.home-login>div>form{
     padding:0;
     margin:0;
     text-align: center
 }
-.header>div:nth-child(2)>.container>.row>.home-login>div>form>div>input{
+.home-login>div>form>div>input{
     background: none;
     border:none;
     outline:none;
@@ -225,50 +342,50 @@ z-index: -1;
     direction: ltr;
     padding-left: 50px;
 }
-.header>div:nth-child(2)>.container>.row>.home-login>div>form>div{
+.home-login>div>form>div{
     position: relative;
 }
-.header>div:nth-child(2)>.container>.row>.home-login>div>form>div>.hex1{
+.home-login>div>form>div>.hex1{
     position: absolute;
     top:5px;
     left:0px;
 }
 
-.header>div:nth-child(2)>.container>.row>.home-login>div>form>.remember-password{
+.home-login>div>form>.remember-password{
     margin-top: 10px;
     text-align: right;
 }
 
-.header>div:nth-child(2)>.container>.row>.home-login>div>form>.remember-password>div{
+.home-login>div>form>.remember-password>div{
     float: right;
     padding:5px;
     text-align: center;
     
 }
 
-.header>div:nth-child(2)>.container>.row>.home-login>div>form>.remember-password>div>h4{
+.home-login>div>form>.remember-password>div>h4{
     display: inline-block;
     font-size: 14px;
     font-weight: 100;
 }
-.header>div:nth-child(2)>.container>.row>.home-login>div>form>.remember-password>div:nth-child(1){
+.home-login>div>form>.remember-password>div:nth-child(1){
     padding-top:15px;
     
 }
-.header>div:nth-child(2)>.container>.row>.home-login>div>form>.remember-password>div>input{
+.home-login>div>form>.remember-password>div>input{
     display: none;
 }
 
-.header>div:nth-child(2)>.container>.row>.home-login>div>form>.remember-password>div>input + label .hexagon{
+.home-login>div>form>.remember-password>div>input + label .hexagon{
     transition: all ease 0.5s;
     cursor: pointer;
 }
-.header>div:nth-child(2)>.container>.row>.home-login>div>form>.remember-password>div>input[type="radio"]:checked + label .hexagon{
+.home-login>div>form>.remember-password>div>input[type="checkbox"]:checked + label .hexagon{
     background: rgba(137, 137, 137,0.7);
 }
 
 
-.header>div:nth-child(2)>.container>.row>.home-login>div>form>.login-button>input{
+.home-login>div>form>.login-button>input{
     text-align: center;
     margin:0;
     height: 40px;
@@ -278,96 +395,234 @@ z-index: -1;
     transition: all ease 0.3s;
     
 }
-.header>div:nth-child(2)>.container>.row>.home-login>div>form>.login-button>input:hover{
+.home-login>div>form>.login-button>input:hover{
     color: rgb(249, 149, 0);
     background: rgb(255, 255, 255);
     border: 1px solid rgb(249, 149, 0);
 }
 
-.header>div:nth-child(2)>.container>.row>.home-login>div>.forget-password>h3{
+.home-login>div>.forget-password>h3{
     font-size: 13px;
     color:rgb(209, 209, 209);
     cursor: pointer;
     text-align: left;
     transition: all ease 0.5s;
 }
-.header>div:nth-child(2)>.container>.row>.home-login>div>.forget-password>h3:hover{
+.home-login>div>.forget-password>h3:hover{
     color:white;
 }
 
-.header>div:nth-child(2)>.container>.row>.home-login>div>.register-new>h3{
+.home-login>div>.register-new>h3{
         text-align: center;
     font-size: 14px;
     margin:0;
     margin-bottom: 5px;
 }
-.header>div:nth-child(2)>.container>.row>.home-login>div>.register-new>ul{
+.home-login>div>.register-new>ul{
     text-align: center;
     margin-top: 10px;
 }
-.header>div:nth-child(2)>.container>.row>.home-login>div>.register-new>ul>a{
+.home-login>div>.register-new>ul>a{
     color:white;    
     text-decoration: none;
 }
-.header>div:nth-child(2)>.container>.row>.home-login>div>.register-new>ul>a:hover{
+.home-login>div>.register-new>ul>a:hover{
     text-decoration: none;
 }
-.header>div:nth-child(2)>.container>.row>.home-login>div>.register-new>ul>a>li{
+.home-login>div>.register-new>ul>a>li{
     display: inline-block;
-    margin: 0 33px;
+    margin: 0 19px;
     float:right;
 }
-.header>div:nth-child(2)>.container>.row>.home-login>div>.register-new>ul>a>li>.hex30>div{
+.home-login>div>.register-new>ul>a>li>.hex30>div{
     transition: all ease 0.3s;
 }
 
-.header>div:nth-child(2)>.container>.row>.home-login>div>.register-new>ul>a:nth-child(1)>li>.hex30>div:hover{
+.home-login>div>.register-new>ul>a:nth-child(1)>li>.hex30>div:hover{
     background: rgb(221, 62, 62);
     border:none !important;
 }
-.header>div:nth-child(2)>.container>.row>.home-login>div>.register-new>ul>a:nth-child(1)>li>.hex30>div:hover:before{
+.home-login>div>.register-new>ul>a:nth-child(1)>li>.hex30>div:hover:before{
     border:none;
 }
-.header>div:nth-child(2)>.container>.row>.home-login>div>.register-new>ul>a:nth-child(1)>li>.hex30>div:hover:after{
+.home-login>div>.register-new>ul>a:nth-child(1)>li>.hex30>div:hover:after{
     border:none;
 }
 
-.header>div:nth-child(2)>.container>.row>.home-login>div>.register-new>ul>a:nth-child(2)>li>.hex30>div:hover{
+.home-login>div>.register-new>ul>a:nth-child(3)>li>.hex30>div:hover{
     background: rgb(0, 114, 237);
     border:none !important;
 }
-.header>div:nth-child(2)>.container>.row>.home-login>div>.register-new>ul>a:nth-child(2)>li>.hex30>div:hover:before{
-    border:none;
-}
-.header>div:nth-child(2)>.container>.row>.home-login>div>.register-new>ul>a:nth-child(2)>li>.hex30>div:hover:after{
+.home-login>div>.register-new>ul>a:nth-child(3)>li>.hex30>div:hover:before{
     border:none;
 }
 
-.header>div:nth-child(2)>.container>.row>.home-login>div>.register-new>ul>a>li>.hex30>div>div{
+.home-login>div>.register-new>ul>a:nth-child(3)>li>.hex30>div:hover:after{
+    border:none;
+}
+
+.home-login>div>.register-new>ul>a>li>.hex30>div>div{
     width: 100%;
     height: 100%;
     text-align: center;
     z-index: 999;
     padding:0;
     margin:0;
-    
 }
-.header>div:nth-child(2)>.container>.row>.home-login>div>.register-new>ul>a>li>.hex30>div>div>h3{
+
+.home-login>div>.register-new>ul>a>li>.hex30>div>div>h3{
     height: 30px;
     width: 45px;
     margin-right: -5px;
     margin-top:20px;
-    
     text-align: center;
     font-size: 12px;
     color:white ;
-    
-    
 }
 
 
 
 /************ END LOGIN **************/
+
+
+/****************START  SIGNUP ******************/
+
+.home-signup{
+    width: 400px;
+    height: 550px;
+    background: rgba(0,0,0,0.8);
+    z-index: 99999;
+    color:white;
+    float:right;
+    margin:0 10px;
+}
+.home-signup>div{
+    width: 100%;
+    height: 100%;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+.home-signup>ul{
+    text-align: center;
+    margin-bottom: 15px;
+}
+.home-signup>ul>a>li{
+    float:right;
+    background: white;
+    width: 50%;
+    color:black;
+    padding:10px;
+    
+    
+}
+.home-signup>ul>a>.active-signup{
+    background: rgba(0,0,0,0.0);
+    color:white;
+}
+.home-signup>ul>a>li>input{
+    display: none;
+    
+}
+.home-signup>ul>a>li>label{
+    cursor: pointer;
+}
+.home-signup>div>h1{
+    margin:0 auto;
+    padding:8px;
+    font-size: 19px;
+    text-align: center;
+   
+}
+.home-signup>div>h6{
+    text-align: center;
+    margin:0
+}
+.home-signup>div>form{
+    padding:0;
+    margin:0;
+    text-align: center
+}
+.home-signup>div>form>div>input{
+    background: none;
+    border:none;
+    outline:none;
+    border-bottom: 1px solid rgba(255,255,255,0.8);
+    display:block;
+    width: 100%;
+    padding:9px;
+    direction: rtl;
+    
+}
+
+
+.home-signup>div>form>div:nth-child(2),.home-signup>div>form>div:nth-child(3){
+    margin:0;
+    width:46%;
+    margin:0 7px;
+    float: right;
+    display: inline-block;
+}
+
+.home-signup>div>form>div:nth-child(2)>input,.home-signup>div>form>div:nth-child(3)>input{
+    text-align: center;
+}
+
+.home-signup>div>form>.signup-button>input{
+    text-align: center;
+    margin:0;
+    height: 40px;
+    padding:7px;
+    border:0;
+    background:  rgb(0, 114, 237);
+    transition: all ease 0.3s;
+    
+}
+.home-signup>div>form>.signup-button>input:hover{
+    color:  rgb(0, 114, 237);
+    background: rgb(255, 255, 255);
+    border: 1px solid  rgb(0, 114, 237);
+}
+.home-signup>div>form>.accept-contract{
+    height: 30px;
+    text-align: right;
+    margin-top: 20px;
+    vertical-align: middle;
+    
+}
+.home-signup>div>form>.accept-contract>input[type="checkbox"]{
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    display: none;
+    margin:0 9px;
+    margin-top: 5px;
+    float: right;
+    
+}
+.home-signup>div>form>.accept-contract>label{
+    width: 18px;
+    height: 18px;
+    margin:0 9px;
+    margin-top: 5px;
+    float: right;
+}
+.home-signup>div>form>.accept-contract>input[type="checkbox"]:checked+label>div>div{
+    background: white;
+}
+.home-signup>div>form>.accept-contract>label{
+    cursor: pointer;
+}
+.home-signup>div>form>.accept-contract>p{
+    float: right;
+    margin-top: 2px;
+}
+.home-signup>div>form>.accept-contract>p>span{
+    text-decoration: underline;
+    cursor: pointer;    
+}
+
+
+/******************END  SIGNUP ******************/
 
 .header>div:nth-child(2)>.container>.row>img{
     width: 300px;
@@ -595,7 +850,7 @@ background: linear-gradient(to left, #29323c, #485563);
     font-size: 25px;
     margin:0;
     padding-top: 35px;
-    margin-bottom: 5px;
+    
 
 }
 .container .row .user-profile>div>div:nth-child(3)>h4{
@@ -604,7 +859,7 @@ background: linear-gradient(to left, #29323c, #485563);
     font-size:30px;
     font-weight:bold;
     line-height: 0.5;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 .container .row .user-profile>div>div:nth-child(3)>h4>span{
     
@@ -622,6 +877,14 @@ background: linear-gradient(to left, #29323c, #485563);
     color:white;
     display: inline-block;
     
+}
+
+.bee-border{
+    border:1px solid black;
+    border-radius: 80%/ 0 0 5px 5px;
+    margin-bottom: 7px;
+    box-shadow: 0.5px 0.5px 3px
+
 }
 /************** BEST USER RANK*********************/
 

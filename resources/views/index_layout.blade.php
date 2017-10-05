@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/animate.css">
+        <link rel="stylesheet" href="css/selectize.css">
 	<link rel="stylesheet" href="css/style.css">
 	<script src="js/angular.min.js"></script>	
     </head>
@@ -18,105 +19,246 @@
             <div></div>
             <div>
 		<div class="container">
-                    <div class="row">
-			<div class="firstbar">
-                            <ul>
-				<li>+90 555 331 55 55</li>
-                            </ul>
+                    
+		    <div class="row firstbar">
+                        <div class="col-sm-4"> <ul>
+                            <li>تسجيل</li>
+                            <li>تسجيل الدخول</li>
+                            
+                        </ul></div>
+			<div class="col-sm-4">
+                            
 			</div>
-			@if($user_in != true)
-			    <div class="home-login">
-				<ul>
-				    <a href="#user"><li data-u="{{ route('login.user') }}" class="login-form active-login">متطوع</li></a>
-				    <a href="#comp"><li data-u="{{ route('login.comp') }}" class="login-form ">مؤسسة أو شركة</li></a>
-				</ul>
-				<div>
+			<div class="col-sm-4"><div class="hex80 hexagon-wrapper">
+                            <div class="hexagon">
+                                <img src="img/honey.png">
+                            </div>
+                        </div></div>
+		    </div>
+		    <div class="clear"></div>
+		    @if($user_in != true)
+			<div class="home-login">
+			    <ul>
+				<a href="#user"><li data-u="{{ route('login.user') }}" class="login-form active-login">متطوع</li></a>
+				<a href="#comp"><li data-u="{{ route('login.comp') }}" class="login-form ">مؤسسة أو شركة</li></a>
+			    </ul>
+			    <div>
+				<br><br><br>
+				<h1>تسجيل الدخول</h1>
+				<form onsubmit="return false;" ng-controller="loginController">
+				    <input id="login-tp" type="hidden" value="{{ route('login.user') }}"/>
+				    {{ csrf_field() }}
 				    <br><br><br>
-				    <h1>تسجيل الدخول</h1>
-				    <form onsubmit="return false;" ng-controller="loginController">
-					<input id="login-tp" type="hidden" value="{{ route('login.user') }}"/>
-					{{ csrf_field() }}
-					<br><br><br>
-					<div>
-					    <div class="hex1 hexagon-wrapper">
-						<div class="hexagon">
-						    <i class="fa fa-envelope" aria-hidden="true"></i>
-						</div>
+				    <div>
+					<div class="hex1 hexagon-wrapper">
+					    <div class="hexagon">
+						<i class="fa fa-envelope" aria-hidden="true"></i>
 					    </div>
-					    <input ng-model="email" type="text" placeholder="البريد الإلكتروني">
 					</div>
-					<div>
+					<input ng-model="email" type="text" placeholder="البريد الإلكتروني">
+				    </div>
+				    <div>
 
-					    <div class="hex1 hexagon-wrapper">
-						<div class="hexagon">
-						    <i class="fa fa-lock" aria-hidden="true"></i>
-						</div>
+					<div class="hex1 hexagon-wrapper">
+					    <div class="hexagon">
+						<i class="fa fa-lock" aria-hidden="true"></i>
 					    </div>
-					    <input ng-model="password" type="password" placeholder="كلمة المرور">
 					</div>
-					<div class="remember-password">
+					<input ng-model="password" type="password" placeholder="كلمة المرور">
+				    </div>
+				    <div class="remember-password">
 
-					    <div>
-						<input id="remember-me" type="radio">
-						<label for="remember-me">
-						    <div class="hex3 hexagon-wrapper">
-							<div  class="hexagon">
-							    
-							</div>
+					<div>
+					    <input id="remember-me" type="checkbox">
+					    <label for="remember-me">
+						<div class="hex3 hexagon-wrapper">
+						    <div  class="hexagon">
+							
 						    </div>
-						</label>
-					    </div>
-					    <div>
-						<h4>تذكر كلمة المرور</h4>
-					    </div>
+						</div>
+					    </label>
 					</div>
-					<div class="clear"></div>
-					<div class="login-button">
-					    <input ng-click="login()" type="button" value="تسجيل الدخول">
+					<div>
+					    <h4>تذكر كلمة المرور</h4>
 					</div>
-
-				    </form>
+				    </div>
 				    <div class="clear"></div>
-
-
-				    <div class="forget-password">
-					<h3>نسيت كلمة المرور؟</h3>
+				    <div class="login-button">
+					<input ng-click="login()" type="button" value="تسجيل الدخول">
 				    </div>
-				    <br>
-				    <div class="register-new">
-					<h3>لست عضواً في المنصة بعد؟</h3>
-					<h3>سجّل كـ :</h3>
 
-					<ul>
-					    <a href="">
-						<li>
-						    <div class="hex30 hexagon-wrapper">
-							<div class="hexagon">
-							    <div>
-								<h3>متطوع</h3>
-							    </div>
+				</form>
+				<div class="clear"></div>
+
+
+				<div class="forget-password">
+				    <h3>نسيت كلمة المرور؟</h3>
+				</div>
+				<br>
+				<div class="register-new">
+				    <h3>لست عضواً في المنصة بعد؟</h3>
+				    <h3>سجّل كـ :</h3>
+
+				    <ul>
+					<a href="">
+					    <li>
+						<div class="hex30 hexagon-wrapper">
+						    <div class="hexagon">
+							<div>
+							    <h3>متطوع</h3>
 							</div>
 						    </div>
-						</li>
-					    </a>
-					    <a href="">
-						<li>
-						    <div class="hex30 hexagon-wrapper">
-							<div class="hexagon">
-							    <div>
-								<h3>مؤسسة</h3>
-							    </div>
+						</div>
+					    </li>
+					</a>
+					<a href="#">
+                                            <li>
+						<div>
+                                                    <div>
+							<div>
+                                                            <h3>أو</h3>
+							</div>
+                                                    </div>
+						</div>
+                                            </li>
+					</a>
+					<a href="">
+					    <li>
+						<div class="hex30 hexagon-wrapper">
+						    <div class="hexagon">
+							<div>
+							    <h3>مؤسسة</h3>
 							</div>
 						    </div>
-						</li>
-					    </a>
-					    
-					</ul>
-				    </div>
+						</div>
+					    </li>
+					</a>
+					
+				    </ul>
 				</div>
 			    </div>
-			@endif
-                    </div>
+			</div>
+			<div class="home-signup">
+                            <ul>
+				<a href=""><li class="active-signup">متطوع</li></a>
+				<a href=""><li>مؤسسة أو شركة</li></a>
+                            </ul>
+                            <div>
+				<br><br><br>
+				<h1>تسجيل جديد</h1>
+				<form class="user-signup" onsubmit="return false;" ng-controller="registerController">
+                                    <br>
+                                    <div>
+					<input ng-model="fname" type="text" placeholder="الإسم الأول">
+                                    </div>
+                                    <div>
+					<input ng-model="lname" type="text" placeholder="الكنية">
+                                    </div>
+				    <div class="clear"></div>
+                                    <div>
+					<select id="ucountry" ng-model="country" class="selectsearch">
+					    <option value="">اختر بلداً</option>
+                                            <option value="1">تركيا</option>
+                                            <option value="2">سوريا</option>
+                                            <option value="3">مصر</option>
+					</select>
+                                    </div>
+                                    <div>
+					<select id="uuniver" ng-model="univer" class="selectsearch">
+					    <option value="">اختر جامعةً</option>
+                                            <option value="1">جامعة دمشق</option>
+                                            <option value="2">اسكودار</option>
+                                            <option value="3">بيكينت</option>
+					</select>
+                                    </div>
+                                    <div>
+					<select id="ulang" ng-model="lang" class="selectsearch">
+					    <option value="">اختر اللغة</option>
+                                            <option value="1">العربية</option>
+                                            <option value="2">التركية</option>
+                                            <option value="3">الإنجليزية</option>
+					</select>
+                                    </div>
+                                    <div>
+					<input ng-model="uemail" type="email" placeholder="البريد الإلكتروني">
+                                    </div>
+                                    <div>
+					<input ng-model="password" type="password" placeholder="كلمة المرور">
+                                    </div>
+                                    <br><br><br>
+                                    <div class="signup-button">
+					<input ng-click="register()" type="button" value="تسجيل">
+                                    </div>
+				    <span ng-bind="greenMsg"></span>
+				    <div id="reg-err">
+					<span ng-repeat="err in regErrors"><% err.toString() %> <br/></span>
+				    </div>
+				</form>
+				<form class="company-signup hide-form">
+                                    <br>
+                                    <div>
+					<input type="text" placeholder="اسم الشركة أو المؤسسة">
+                                    </div>
+                                    
+                                    <div>
+					<input type="text" placeholder="الاسم اللاتيني">
+                                    </div>
+                                    <div class="clear"></div>
+                                    <div>
+					<select class="selectsearch">
+					    <option value="">نوع المؤسسة أو الشركة</option>
+                                            <option value="1">منظمة مجتمع مدني</option>
+                                            <option value="2">مؤسسة حكومية</option>
+                                            <option value="3">جامعة</option>
+                                            <option value="3">شركة</option>
+					</select>
+                                    </div>
+                                    <div>
+					<select class="selectsearch">
+					    <option value="">التصنيف</option>
+                                            <option value="1">مقدمة خدمة</option>
+                                            <option value="2">طالبة تطوع</option>
+                                            <option value="3">مقدمة خدمة وطالبة تطوع</option>
+					</select>
+                                    </div>
+                                    <div>
+					<input type="text" placeholder="رقم الترخيص">
+                                    </div>
+                                    
+                                    <div>
+					<input type="email" placeholder="البريد الإلكتروني">
+                                    </div>
+                                    <div>
+					<input type="password" placeholder="كلمة المرور">
+                                    </div>
+                                    <div class="accept-contract">
+					<input type="checkbox" id="accept-contract">
+					
+					<label for="accept-contract">
+					    <div class="hex3 hexagon-wrapper">
+						<div class="hexagon">
+						    
+						</div>
+					    </div>
+					</label>
+					<p>أوافق على <span>الشروط والاحكام.</span></p>
+					
+                                    </div>
+                                    
+                                    
+                                    <br><br><br>
+                                    <div class="signup-button">
+					<input type="button" value="تسجيل">
+                                    </div>
+
+				</form>
+				
+
+				
+                            </div>
+			</div>        
+		    @endif
+                    
 		</div>
             </div>
 	</section>
@@ -218,12 +360,17 @@
 	<script src="js/wow.min.js"></script>
 	<script src="js/main.js"></script>
 	<script src="js/angular_apps.js"></script>
+        <script src="js/selectize.js"></script>
+	<script>
+	 $('.selectsearch').selectize();
+	</script>
+        <script>
+	 $('.login-form').on('click', function(){
+	     $('li.login-form').removeClass('active-login');
+	     $(this).addClass('active-login');
+	     $("#login-tp").val($(this).data('u'));
+	 });
+	</script>
     </body>
-    <script>
-     $('.login-form').on('click', function(){
-	 $('li.login-form').removeClass('active-login');
-	 $(this).addClass('active-login');
-	 $("#login-tp").val($(this).data('u'));
-     });
-    </script>
+    
 </html>

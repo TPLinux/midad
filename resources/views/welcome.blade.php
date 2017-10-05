@@ -74,6 +74,9 @@
                             <li><i class="fa fa-user-o" aria-hidden="true"></i></li>
                             <li><i class="fa fa-share-alt" aria-hidden="true"></i></li>
                         </ul>
+                        <div class="bee-border"></div>
+                            <div class="bee-border"></div>
+                            <div class="bee-border"></div>
 
                     </div>
                 </div>
@@ -103,6 +106,9 @@
                             <li><i class="fa fa-user-o" aria-hidden="true"></i></li>
                             <li><i class="fa fa-share-alt" aria-hidden="true"></i></li>
                         </ul>
+                        <div class="bee-border"></div>
+                            <div class="bee-border"></div>
+                            <div class="bee-border"></div>
 
                     </div>
                 </div>
@@ -132,6 +138,9 @@
                             <li><i class="fa fa-user-o" aria-hidden="true"></i></li>
                             <li><i class="fa fa-share-alt" aria-hidden="true"></i></li>
                         </ul>
+                        <div class="bee-border"></div>
+                            <div class="bee-border"></div>
+                            <div class="bee-border"></div>
 
                     </div>
                 </div>
@@ -161,6 +170,9 @@
                             <li><i class="fa fa-user-o" aria-hidden="true"></i></li>
                             <li><i class="fa fa-share-alt" aria-hidden="true"></i></li>
                         </ul>
+                        <div class="bee-border"></div>
+                            <div class="bee-border"></div>
+                            <div class="bee-border"></div>
 
                     </div>
                 </div>
@@ -190,6 +202,9 @@
                             <li><i class="fa fa-user-o" aria-hidden="true"></i></li>
                             <li><i class="fa fa-share-alt" aria-hidden="true"></i></li>
                         </ul>
+                        <div class="bee-border"></div>
+                            <div class="bee-border"></div>
+                            <div class="bee-border"></div>
 
                     </div>
                 </div>
@@ -219,6 +234,9 @@
                             <li><i class="fa fa-user-o" aria-hidden="true"></i></li>
                             <li><i class="fa fa-share-alt" aria-hidden="true"></i></li>
                         </ul>
+                        <div class="bee-border"></div>
+                            <div class="bee-border"></div>
+                            <div class="bee-border"></div>
 
                     </div>
                 </div>

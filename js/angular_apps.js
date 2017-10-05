@@ -8,45 +8,54 @@ var app = angular.module('app', [], function($interpolateProvider){
   }]);
 */
 app.controller('registerController', ['$scope', '$http', function($scope, $http){
-
+       
     $scope.register = function(){
 
-	if($scope.password !== $scope.password2){
-	    alert('password not match');
-	    alert('password not match');
-	}else{
-	    var formData = {
-		u_fname: $scope.fname,
-		u_sname: $scope.sname,
-		u_tname: $scope.tname,
-		u_email: $scope.email,
-		u_password: $scope.password,
-		u_gender: $scope.gender,
-	    };
+	var country, univer, lang;
 
-	    var regRequest = $http({
-		method: 'POST',
-		url: 'register',
-		data: formData
-	    });
+	country = document.getElementById('ucountry');
+	country = country.options[country.selectedIndex].value;
 
-	    regRequest.then(function(resp){
-		if(resp.status === 200){
-		    $scope.regErrors = resp.data.errors;
-		    if(resp.data.status == true){
-			console.log(resp.data.msg);
-			$scope.greenMsg = resp.data.msg;
-		    }else{
-			$scope.greenMsg = null;
-		    }
+	univer = document.getElementById('uuniver');
+	univer = univer.options[univer.selectedIndex].value;
+	
+	lang = document.getElementById('ulang');
+	lang = lang.options[lang.selectedIndex].value;
+	
+	var formData = {
+	    u_fname: $scope.fname,
+	    u_lname: $scope.lname,
+	    u_country: country,
+	    u_univer: univer,
+	    u_lang: lang,
+	    u_email: $scope.uemail,
+	    u_password: $scope.password,
+	};
+
+	console.log(formData);
+	var regRequest = $http({
+	    method: 'POST',
+	    url: 'register',
+	    data: formData
+	});
+
+	regRequest.then(function(resp){
+	    if(resp.status === 200){
+		$scope.regErrors = resp.data.errors;
+		console.log(resp.data);
+		if(resp.data.status == true){
+		    $scope.greenMsg = resp.data.msg;
+		    window.location.href = 'userd';
+		}else{
+		    $scope.greenMsg = null;
 		}
-	    }).catch(function(err){
-		$scope.regErrors = err.data.errors;
-		for(var x in err.data.errors){
-		    console.log(err.data.errors[x]);
-		}
-	    });
-	}
+	    }
+	}).catch(function(err){
+	    $scope.regErrors = err.data.errors;
+	    for(var x in err.data.errors){
+		console.log(err.data.errors[x]);
+	    }
+	});
     }
     
 }]);
@@ -115,6 +124,7 @@ app.controller('loginController', ['$scope', '$http', function($scope, $http){
 
 	loginRequest.then(function(resp){
 	    if(resp.status === 200){
+		console.log(resp.data);
 		var info = resp.data;
 		if(info.status == true){
 		    alert(info.msg);

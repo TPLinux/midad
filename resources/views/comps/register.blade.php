@@ -16,7 +16,9 @@
 	    <input ng-model="comp_password2" type="password" placeholder="اعد كتابة كلمة المرور"/><br/><br/>
 	    <button ng-click="register()">تسجيل</button>
 	    <ul ng-repeat="err in regErrors">
-		<li><span ng-bind="err.toString()" style="color:red"></span></li>
+		<li>
+		    <span ng-bind="err.toString()" style="color:red"></span>
+		</li>
 	    </ul>
 
 	    <div>

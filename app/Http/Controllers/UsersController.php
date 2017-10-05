@@ -47,9 +47,10 @@ class UsersController extends Controller
 
             $this->validate(request(),[
                 'u_fname'=>'required|min:4',
-                'u_sname'=>'required|min:4',
-                'u_tname'=>'required|min:4',
-                'u_gender'=>'required|min:1|max:1',
+                'u_lname'=>'required|min:4',
+                'u_country'=>'required|min:1',
+                'u_univer'=>'required|min:1',
+                'u_lang'=>'required|min:1',
                 'u_email'=>'required|string|email',
                 'u_password'=>'required|min:6',
             ]);
@@ -67,13 +68,16 @@ class UsersController extends Controller
                 }else{
                     $user->insert([
                         "u_fname" => request('u_fname'),
-                        "u_sname" => request('u_sname'),
-                        "u_tname" => request('u_tname'),
+                        "u_lname" => request('u_lname'),
+                        "u_country" => request('u_country'),
+                        "u_univ_name" => request('u_univer'),
+                        "u_lang" => request('u_lang'),
                         "u_email" => request('u_email'),
                         "u_password" => sha1(request('u_password')),
-                        "u_gender" => request('u_gender'),
+                        "u_confirm_code" => "123123",
                     ]);
-                    
+                    $login = User::where('u_email', request('u_email'))->where('u_password', sha1(request('u_password')))->first();
+                    Auth::login($login, true);
                     $resp = [
                         "errors" => [],
                         "status" => true,

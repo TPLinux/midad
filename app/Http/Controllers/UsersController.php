@@ -36,7 +36,6 @@ class UsersController extends Controller
         }
         $resp['empty_fields_count'] = $empty_fields_count;
         $resp = (object) $resp;
-        dd($resp);
         return view('users.userd_index')->with('user', $resp);
     }
 

@@ -27,6 +27,7 @@ class UsersController extends Controller
                     $empty_fields_count += 1;
             }
             if($empty_fields_count > 0){
+                $resp['empty_fields_count'] = $empty_fields_count;
                 $resp['full_profile'] = false;
             }else{
                 $resp['full_profile'] = true;

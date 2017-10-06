@@ -14,13 +14,13 @@
 	<script src="js/angular.min.js"></script>	
     </head>
     <body>
+	<a href="{{route('logout')}}">Logout</a>
+	<br/>
 	@if($user->confirmed == true)
 	    @if($user->full_profile == false)
-		يرجى اكمال معلوماتك الشخصية
-		@extends('users.settings')
-	    @else
-		@yield('userd_content')
+		
 	    @endif
+	    @yield('userd_content')
 	@else
 	    Please Confirm your account from email
 	@endif

@@ -19,7 +19,11 @@ class CompController extends Controller
         // echo var_dump($auth);
         // die();
         if($auth){
-            Auth::guard('comp')->login($auth, true);
+            if(request('remember') == true || request('remember') == false)
+                $remember = request('remember');
+            else
+                $remember = false;
+            Auth::guard('comp')->login($auth, $remember);
             // return redirect('compd');
             return [
                 'status' => true,

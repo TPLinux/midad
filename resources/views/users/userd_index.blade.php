@@ -4,7 +4,9 @@
 @endsection
 
 
-@section('content')
-    USERRR
+@section('userd_content')
+    <br/>
+    You Have Logged in !
+    <br/>
 @endsection
 

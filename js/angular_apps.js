@@ -109,6 +109,7 @@ app.controller('loginController', ['$scope', '$http', function($scope, $http){
     
     $scope.login = function(){
 	var formData = {
+	    remember: $scope.remember_me || false,
 	    email: $scope.email,
 	    password: $scope.password,
 	};

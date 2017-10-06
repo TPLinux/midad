@@ -22,10 +22,20 @@ class UsersController extends Controller
             $resp['confirmed'] = true;
             $resp['user'] = $user->toArray();
             $empty_fields_count = 0;
+            // ignore from profile mist cont...
+            $ignore_columns = [
+                'u_team',
+                'u_points',
+                'created_at',
+                'updated_at'
+            ];
             foreach($resp['user'] as $k => $v){
+                if(in_array($k, $ignore_columns))
+                    continue;
                 if($v == null)
                     $empty_fields_count += 1;
             }
+            // dd($empty_fields_count);
             if($empty_fields_count > 0){
                 $resp['empty_fields_count'] = $empty_fields_count;
                 $resp['full_profile'] = false;
@@ -35,7 +45,7 @@ class UsersController extends Controller
         }else{
             $resp['confirmed'] = false;
         }
-        $resp['empty_fields_count'] = $empty_fields_count;
+        
         $resp = (object) $resp;
         return view('users.userd_index')->with('user', $resp);
     }
@@ -56,7 +66,11 @@ class UsersController extends Controller
 
         $auth = User::where('u_email',$req->email)->where('u_password',sha1($req->password))->first();
         if($auth){
-            Auth::login($auth, true);
+            if(request('remember') == true || request('remember') == false)
+                $remember = request('remember');
+            else
+                $remember = false;
+            Auth::login($auth, $remember);
             // return redirect('userd');
             return [
                 'status' => true,
@@ -108,7 +122,8 @@ class UsersController extends Controller
                         "u_confirm_code" => "123123",
                     ]);
                     $login = User::where('u_email', request('u_email'))->where('u_password', sha1(request('u_password')))->first();
-                    Auth::login($login, true);
+                    Auth::login($login, false);
+                    
                     $resp = [
                         "errors" => [],
                         "status" => true,

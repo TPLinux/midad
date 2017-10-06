@@ -69,7 +69,7 @@
 				    <div class="remember-password">
 
 					<div>
-					    <input id="remember-me" type="checkbox">
+					    <input id="remember-me" ng-model="remember_me" type="checkbox">
 					    <label for="remember-me">
 						<div class="hex3 hexagon-wrapper">
 						    <div  class="hexagon">
@@ -140,8 +140,8 @@
 			</div>
 			<div class="home-signup">
                             <ul>
-				<a href=""><li class="active-signup">متطوع</li></a>
-				<a href=""><li>مؤسسة أو شركة</li></a>
+				<a href="#user"><li id="user-su" class="signup-form active-signup">متطوع</li></a>
+				<a href="#comp"><li id="comp-su" class="signup-form ">مؤسسة أو شركة</li></a>
                             </ul>
                             <div>
 				<br><br><br>
@@ -194,45 +194,45 @@
 					<span ng-repeat="err in regErrors"><% err.toString() %> <br/></span>
 				    </div>
 				</form>
-				<form class="company-signup hide-form">
+				<form class="company-signup hide-form" onsubmit="return false;" ng-controller="registerController">
                                     <br>
                                     <div>
-					<input type="text" placeholder="اسم الشركة أو المؤسسة">
+					<input ng-model="comp_name" type="text" placeholder="اسم الشركة أو المؤسسة">
                                     </div>
                                     
                                     <div>
-					<input type="text" placeholder="الاسم اللاتيني">
+					<input ng-model="comp_name_en" type="text" placeholder="الاسم اللاتيني">
                                     </div>
                                     <div class="clear"></div>
                                     <div>
-					<select class="selectsearch">
+					<select id="comp_type" class="selectsearch">
 					    <option value="">نوع المؤسسة أو الشركة</option>
-                                            <option value="1">منظمة مجتمع مدني</option>
-                                            <option value="2">مؤسسة حكومية</option>
-                                            <option value="3">جامعة</option>
-                                            <option value="3">شركة</option>
+                                            <option value="org_comp">منظمة مجتمع مدني</option>
+                                            <option value="gov_comp">مؤسسة حكومية</option>
+                                            <option value="uni_comp">جامعة</option>
+                                            <option value="comp_comp">شركة</option>
 					</select>
                                     </div>
                                     <div>
-					<select class="selectsearch">
+					<select id="comp_sort" class="selectsearch">
 					    <option value="">التصنيف</option>
-                                            <option value="1">مقدمة خدمة</option>
-                                            <option value="2">طالبة تطوع</option>
-                                            <option value="3">مقدمة خدمة وطالبة تطوع</option>
+                                            <option value="doner_comp">مقدمة خدمة</option>
+                                            <option value="bene_comp">طالبة تطوع</option>
+                                            <option value="both_comp">مقدمة خدمة وطالبة تطوع</option>
 					</select>
                                     </div>
                                     <div>
-					<input type="text" placeholder="رقم الترخيص">
+					<input ng-model="comp_lnumber" type="text" placeholder="رقم الترخيص">
                                     </div>
                                     
                                     <div>
-					<input type="email" placeholder="البريد الإلكتروني">
+					<input ng-model="comp_email" type="email" placeholder="البريد الإلكتروني">
                                     </div>
                                     <div>
-					<input type="password" placeholder="كلمة المرور">
+					<input ng-model="comp_password" type="password" placeholder="كلمة المرور">
                                     </div>
                                     <div class="accept-contract">
-					<input type="checkbox" id="accept-contract">
+					<input ng-model="laccept" type="checkbox" id="accept-contract">
 					
 					<label for="accept-contract">
 					    <div class="hex3 hexagon-wrapper">
@@ -369,6 +369,19 @@
 	     $('li.login-form').removeClass('active-login');
 	     $(this).addClass('active-login');
 	     $("#login-tp").val($(this).data('u'));
+	 });
+	 
+	 $('#user-su').on('click', function(){
+	     $('.user-signup').removeClass('hide-form');
+	     $('.company-signup').addClass('hide-form');
+	     $('li.signup-form').removeClass('active-signup');
+	     $(this).addClass('active-signup');
+	 });
+	 $('#comp-su').on('click', function(){
+	     $('.user-signup').addClass('hide-form');
+	     $('.company-signup').removeClass('hide-form');
+	     $('li.signup-form').removeClass('active-signup');
+	     $(this).addClass('active-signup');
 	 });
 	</script>
     </body>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\User;
 use App;
 use Auth;
@@ -13,6 +14,36 @@ class UsersController extends Controller
         
     }
 
+    public function userDB(){
+        $user = Auth::user();
+        $resp = [];
+        
+        if($user->u_confirmed == true){
+            $resp['confirmed'] = true;
+            $resp['user'] = $user->toArray();
+            $empty_fields_count = 0;
+            foreach($resp['user'] as $k => $v){
+                if($v == null)
+                    $empty_fields_count += 1;
+            }
+            if($empty_fields_count > 0){
+                $resp['full_profile'] = false;
+            }else{
+                $resp['full_profile'] = true;
+            }
+        }else{
+            $resp['confirmed'] = false;
+        }
+        $resp['empty_fields_count'] = $empty_fields_count;
+        $resp = (object) $resp;
+        dd($resp);
+        return view('users.userd_index')->with('user', $resp);
+    }
+
+    public function userDBAPI(){
+        $user = Auth::user();
+    }
+    
     public function register(){
         return view('register')->with('user_in', $this->user_in);
     }
@@ -94,5 +125,15 @@ class UsersController extends Controller
             
             return $resp;
     }
-    
+
+    // confirm user
+    public function confirmUser($ccode){
+        $code_exists = User::where('u_confirm_code', $ccode)->first();
+        if($code_exists){
+            User::where('u_confirm_code', $ccode)->update([ 'u_confirmed' => true ]);
+            return redirect('userd');
+        }
+        else
+            dd('no');
+    }
 }

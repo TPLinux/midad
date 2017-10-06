@@ -76,13 +76,7 @@ Route::get('compd', [
 
 Route::get('userd', [
     'middleware' => 'auth',
-    'uses' => function(){
-        $user = Auth::user();
-        echo '<h2>User panel</h2>';
-        echo "Your email is: " . $user->u_email;
-        echo "<br/>";
-        echo '<a href="'. route('logout') .'">Logout</a>';
-    }
+    'uses' => 'UsersController@userDB'
 ])->name('userd');
 
 Route::post('/logout', function(){
@@ -92,6 +86,9 @@ Route::post('/logout', function(){
     return redirect('/');
 })->name('logout');
 
+Route::get('/confirm/user/{ccode}',[
+    'uses' => 'UsersController@confirmUser'
+])->name('confirm.user');
 Route::get('/logout', function(){
     Auth::guard('comp')->logout();
     Auth::guard('admin')->logout();

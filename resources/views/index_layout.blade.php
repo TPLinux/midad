@@ -157,26 +157,26 @@
 				    <div class="clear"></div>
                                     <div>
 					<select id="ucountry" ng-model="country" class="selectsearch">
-					    <option value="">اختر بلداً</option>
-                                            <option value="1">تركيا</option>
-                                            <option value="2">سوريا</option>
-                                            <option value="3">مصر</option>
+					    <option value="">اختر دولة</option>
+					    @foreach($reg->countries as $country)
+						<option value="{{ $country->country_id  }}">{{ $country->country_name  }}</option>
+					    @endforeach
 					</select>
                                     </div>
                                     <div>
 					<select id="uuniver" ng-model="univer" class="selectsearch">
 					    <option value="">اختر جامعةً</option>
-                                            <option value="1">جامعة دمشق</option>
-                                            <option value="2">اسكودار</option>
-                                            <option value="3">بيكينت</option>
+                                            @foreach($reg->univers as $univer)
+						<option value="{{ $univer->univer_id  }}">{{ $univer->univer_name  }}</option>
+					    @endforeach
 					</select>
                                     </div>
                                     <div>
 					<select id="ulang" ng-model="lang" class="selectsearch">
 					    <option value="">اختر اللغة</option>
-                                            <option value="1">العربية</option>
-                                            <option value="2">التركية</option>
-                                            <option value="3">الإنجليزية</option>
+                                            @foreach($reg->langs as $lang)
+						<option value="{{ $lang->lang_id  }}">{{ $lang->lang_name  }}</option>
+					    @endforeach
 					</select>
                                     </div>
                                     <div>

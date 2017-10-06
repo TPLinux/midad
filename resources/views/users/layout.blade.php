@@ -16,13 +16,17 @@
     <body>
 	<a href="{{route('logout')}}">Logout</a>
 	<br/>
+
 	@if($user->confirmed == true)
+	    You have logged in as : {{$user->user->u_email}}
 	    @if($user->full_profile == false)
 		
 	    @endif
 	    @yield('userd_content')
 	@else
-	    Please Confirm your account from email
+	    Please Confirm your account
+	    <br/>
+	    Try Confirm for test it from here -> <a href="{{route('confirm.user', $user->user->u_confirm_code)}}">CONFIRM</a>
 	@endif
 	<script src="js/jquery-1.12.4.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>

@@ -65,16 +65,27 @@ app.controller('registerController', ['$scope', '$http', function($scope, $http)
 app.controller('compRegisterController', ['$scope', '$http', function($scope, $http){
 
     $scope.register = function(){
-	if($scope.comp_password !== $scope.comp_password2){
-	    alert('password not match');
+	var compType, compSort;
+
+	compType = document.getElementById('comp_type');
+	compType = compType.options[compType.selectedIndex].value;
+
+	compSort = document.getElementById('comp_sort');
+	compSort = compSort.options[compSort.selectedIndex].value;
+
+	if($scope.laccept != true){
+	    alert('يجب عليك الموافقة على الشرط والاحكام');
+	    return
 	}else{
 	    var formData = {
+		laccept: $scope.laccept || false,
 		comp_name: $scope.comp_name,
-		comp_phone: $scope.comp_phone,
+		comp_name_en: $scope.comp_name_en,
+		comp_type: compType,
+		comp_sort: compSort,
 		comp_email: $scope.comp_email,
 		comp_password: $scope.comp_password,
-		comp_manager: $scope.comp_manager,
-		comp_owner: $scope.comp_owner,
+		comp_lnumber: $scope.comp_lnumber,
 	    };
 	    console.log(formData);
 	    var regRequest = $http({
@@ -86,9 +97,10 @@ app.controller('compRegisterController', ['$scope', '$http', function($scope, $h
 	    regRequest.then(function(resp){
 		if(resp.status === 200){
 		    $scope.regErrors = resp.data.errors;
+		    console.log(resp.data);
 		    if(resp.data.status == true){
-			console.log(resp.data.msg);
 			$scope.greenMsg = resp.data.msg;
+			window.location.href = 'compd';
 		    }else{
 			$scope.greenMsg = null;
 		    }

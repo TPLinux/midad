@@ -14,6 +14,15 @@ class CompController extends Controller
         return view('comps.login')->with('user_in', $this->user_in);;
     }
 
+    public function compDB(){
+        $comp = Auth::guard('comp')->user();
+        return view('comps.compd')->with('comp', (object) $comp->toArray());
+        echo '<h2>Comp panel</h2>';
+        echo "Your email is: " . $comp->comp_email;
+        echo "<br/>";
+        echo '';
+    }
+    
     public function loginPost(Request $req){
         $auth = Company::where('comp_email',$req->email)->where('comp_password',sha1($req->password))->first();
         // echo var_dump($auth);
@@ -47,10 +56,12 @@ class CompController extends Controller
         
             $comp = new Company;
             $this->validate(request(),[
+                'laccept'=>'required',
                 'comp_name'=>'required|min:4',
-                'comp_phone'=>'required|min:4',
-                'comp_owner'=>'required|min:4',
-                'comp_manager'=>'required|min:4',
+                'comp_name_en'=>'required|min:4',
+                'comp_type'=>'required',
+                'comp_sort'=>'required',
+                'comp_lnumber'=>'required',
                 'comp_email'=>'required|string|email',
                 'comp_password'=>'required|min:6',
             ]);
@@ -66,13 +77,18 @@ class CompController extends Controller
                     ];
                 }else{
                     $comp->insert([
+                        "comp_confirm_code" => '123123',
                         "comp_name" => request('comp_name'),
-                        "comp_phone" => request('comp_phone'),
+                        "comp_name_en" => request('comp_name_en'),
+                        "comp_lnumber" => request('comp_lnumber'),
+                        "comp_type" => request('comp_type'),
+                        "comp_sort" => request('comp_sort'),
                         "comp_email" => request('comp_email'),
-                        "comp_manager" => request('comp_manager'),
                         "comp_password" => sha1(request('comp_password')),
-                        "comp_owner" => request('comp_owner'),
                     ]);
+
+                    $login = Company::where('comp_email', request('comp_email'))->where('comp_password', sha1(request('comp_password')))->first();
+                    Auth::guard('comp')->login($login, false);
                     
                     $resp = [
                         "errors" => [],
@@ -89,5 +105,16 @@ class CompController extends Controller
             }
             
             return $resp;
+    }
+
+    // confirm comp
+    public function confirmComp($ccode){
+        $code_exists = Company::where('comp_confirm_code', $ccode)->first();
+        if($code_exists){
+            Company::where('comp_confirm_code', $ccode)->update([ 'comp_confirmed' => true ]);
+            return redirect('compd');
+        }
+        else
+            dd('no');
     }
 }

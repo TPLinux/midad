@@ -22,7 +22,17 @@ class IndexController extends Controller
             $user_in = true;
         else
             $user_in = false;
+
+        if(Auth::check())
+            $panel = 'userd';
         
-        return view('welcome')->with('user_in', $user_in)->with('reg', $reg_info);
+        if(Auth::guard('admin')->check())
+            $panel = 'admind';
+        
+        if(Auth::guard('comp')->check())
+            $panel = 'compd';
+        else
+            $panel = '';
+        return view('welcome')->with('user_in', $user_in)->with('reg', $reg_info)->with('panel', $panel);
     }
 }

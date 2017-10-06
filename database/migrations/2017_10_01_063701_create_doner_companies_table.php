@@ -27,6 +27,8 @@ class CreateDonerCompaniesTable extends Migration
             $table->string('comp_manager')->nullable();
             $table->string('comp_owner')->nullable();
             $table->string('comp_logo')->nullable();
+            $table->string('comp_confirm_code');
+            $table->enum('comp_confirmed', ['0','1'])->default('0');
             $table->float('comp_latitude')->default(0.0);
             $table->float('comp_longtude')->default(0.0);
             $table->rememberToken();

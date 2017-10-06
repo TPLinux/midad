@@ -1,3 +1,8 @@
+@if($user_in == true)
+    <script>
+     window.location.href = '{{ $panel }}';
+    </script>
+@endif
 <!DOCTYPE html>
 <html  ng-app="app" >
 
@@ -194,7 +199,7 @@
 					<span ng-repeat="err in regErrors"><% err.toString() %> <br/></span>
 				    </div>
 				</form>
-				<form class="company-signup hide-form" onsubmit="return false;" ng-controller="registerController">
+				<form class="company-signup hide-form" onsubmit="return false;" ng-controller="compRegisterController">
                                     <br>
                                     <div>
 					<input ng-model="comp_name" type="text" placeholder="اسم الشركة أو المؤسسة">
@@ -248,13 +253,9 @@
                                     
                                     <br><br><br>
                                     <div class="signup-button">
-					<input type="button" value="تسجيل">
+					<input ng-click="register()" type="button" value="تسجيل">
                                     </div>
-
 				</form>
-				
-
-				
                             </div>
 			</div>        
 		    @endif

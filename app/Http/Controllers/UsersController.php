@@ -17,10 +17,9 @@ class UsersController extends Controller
     public function userDB(){
         $user = Auth::user();
         $resp = [];
-        
+        $resp['user'] = (object) $user->toArray();
         if($user->u_confirmed == true){
             $resp['confirmed'] = true;
-            $resp['user'] = $user->toArray();
             $empty_fields_count = 0;
             // ignore from profile mist cont...
             $ignore_columns = [

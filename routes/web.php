@@ -65,13 +65,7 @@ Route::get('admind', [
 
 Route::get('compd', [
     'middleware' => 'comp',
-    'uses' => function(){
-        $comp = Auth::guard('comp')->user();
-        echo '<h2>Comp panel</h2>';
-        echo "Your email is: " . $comp->comp_email;
-        echo "<br/>";
-        echo '<a href="'. route('logout') .'">Logout</a>';
-    }
+    'uses' => 'CompController@compDB'
 ])->name('compd');
 
 Route::get('userd', [
@@ -89,6 +83,11 @@ Route::post('/logout', function(){
 Route::get('/confirm/user/{ccode}',[
     'uses' => 'UsersController@confirmUser'
 ])->name('confirm.user');
+
+Route::get('/confirm/comp/{ccode}',[
+    'uses' => 'CompController@confirmComp'
+])->name('confirm.comp');
+
 Route::get('/logout', function(){
     Auth::guard('comp')->logout();
     Auth::guard('admin')->logout();

@@ -67,6 +67,7 @@
     </form>
     <script type="text/javascript">
      uploadImageCrop({
+	 type: 'rectangle',
 	 editDivSelector: '#upload-demo',
 	 inputFileSelector: '#upload',
 	 uploadBtnSelector: '.upload-result',

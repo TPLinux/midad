@@ -1,5 +1,9 @@
 function uploadImageCrop(oo){
     var theType = oo.type || 'square';
+    var aWidth = oo.width || 200;
+    var aHeight = oo.height || 200;
+    var bWidth = oo.bWidth || 300;
+    var bHeight = oo.bHeight || 300;
     var editDivSelector = oo.editDivSelector || '';
     var inputFileSelector = oo.inputFileSelector || '';
     var postUrl = oo.postUrl || '';
@@ -10,13 +14,13 @@ function uploadImageCrop(oo){
     $uploadCrop = $(editDivSelector).croppie({
 	enableExif: true,
 	viewport: {
-	    width: 200,
-	    height: 200,
+	    width: aWidth,
+	    height: aHeight,
 	    type: theType
 	},
 	boundary: {
-	    width: 300,
-	    height: 300
+	    width: bWidth,
+	    height: bHeight
 	}
     });
 

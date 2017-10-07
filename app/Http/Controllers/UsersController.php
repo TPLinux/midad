@@ -4,16 +4,32 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+
 use App\User;
 use App;
 use Auth;
 
 class UsersController extends Controller
 {
+    
     public function index(){
         
     }
 
+    public function upload(Request $req){
+        $koko = mb_substr(sha1(sha1(Auth::user()->u_email) . time()), 0, 7) . "_" . mb_substr(md5(sha1(Auth::user()->u_email) . time() * time()), -10);
+        $image = $this->uploadImageCrop($req->image, $koko);
+        User::where('u_email',Auth::user()->u_email)->update([
+            'u_pic' => $image->image_name
+        ]);
+    }
+    
+    public function settings(){
+        $user = (object) Auth::user()->toArray();
+
+        return view('users.settings')->with('user', $user);
+    }
+    
     public function userDB(){
         $user = Auth::user();
         $resp = [];
@@ -86,58 +102,59 @@ class UsersController extends Controller
     }
     
     public function registerPost(){
+	
+        $user = new User;
+        $this->validate(request(),[
+            'u_fname'=>'required|min:4',
+            'u_lname'=>'required|min:4',
+            'u_country'=>'required|min:1',
+            'u_univer'=>'required|min:1',
+            'u_lang'=>'required|min:1',
+            'u_email'=>'required|string|email',
+            'u_password'=>'required|min:6',
+        ]);
         
-            $user = new User;
-
-            $this->validate(request(),[
-                'u_fname'=>'required|min:4',
-                'u_lname'=>'required|min:4',
-                'u_country'=>'required|min:1',
-                'u_univer'=>'required|min:1',
-                'u_lang'=>'required|min:1',
-                'u_email'=>'required|string|email',
-                'u_password'=>'required|min:6',
-            ]);
+        if(!isset($errors)){
+            $users = User::where('u_email', request('u_email'))->get();
             
-            if(!isset($errors)){
-                $users = User::where('u_email', request('u_email'))->get();
-                
-                if(count($users) > 0){
-                    $resp = [
-                        "errors" => [
-                            'err1' => "This account already exists!!",
-                        ],
-                        "status" => false,
-                    ];
-                }else{
-                    $user->insert([
-                        "u_fname" => request('u_fname'),
-                        "u_lname" => request('u_lname'),
-                        "u_country" => request('u_country'),
-                        "u_univ_name" => request('u_univer'),
-                        "u_lang" => request('u_lang'),
-                        "u_email" => request('u_email'),
-                        "u_password" => sha1(request('u_password')),
-                        "u_confirm_code" => "123123",
-                    ]);
-                    $login = User::where('u_email', request('u_email'))->where('u_password', sha1(request('u_password')))->first();
-                    Auth::login($login, false);
-                    
-                    $resp = [
-                        "errors" => [],
-                        "status" => true,
-                        "msg" => "registered!!"
-                    ];
-                }
-            }else{
+            if(count($users) > 0){
                 $resp = [
-                    "errors" => $errors,
+                    "errors" => [
+                        'err1' => "This account already exists!!",
+                    ],
                     "status" => false,
-                    "msg" => "fields required!"
                 ];
+            }else{
+                $user->insert([
+                    "u_fname" => request('u_fname'),
+                    "u_lname" => request('u_lname'),
+                    "u_country" => request('u_country'),
+                    "u_univ_name" => request('u_univer'),
+                    "u_lang" => request('u_lang'),
+                    "u_email" => request('u_email'),
+                    "u_password" => sha1(request('u_password')),
+                    "u_confirm_code" => "123123",
+                ]);
+		
+                $login = User::where('u_email', request('u_email'))->where('u_password', sha1(request('u_password')))->first();
+                Auth::login($login, false);
+                
+                $resp = [
+                    "errors" => [],
+                    "status" => true,
+                    "msg" => "registered!!"
+                ];
+                
             }
-            
-            return $resp;
+        }else{
+            $resp = [
+                "errors" => $errors,
+                "status" => false,
+                "msg" => "fields required!"
+            ];
+        }
+        
+        return $resp;
     }
 
     // confirm user

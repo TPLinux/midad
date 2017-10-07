@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+
 use Auth;
 // models
 use App\Univer;
@@ -34,5 +36,15 @@ class IndexController extends Controller
         else
             $panel = '';
         return view('welcome')->with('user_in', $user_in)->with('reg', $reg_info)->with('panel', $panel);
+    }
+
+    public function mail(){
+        Mail::send('emails.confirm', [
+            'theRoute' => 'confirm/user/123123'
+        ], function($message){
+            $message->from('webmaster@zeyd.org', 'Verify Your Account');
+            $message->to('atfsy.syrian@gmail.com')->subject('Verify Your Account');
+            echo var_dump($message);
+        });
     }
 }

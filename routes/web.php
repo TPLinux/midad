@@ -21,6 +21,15 @@ Route::get('/lang/{locale}',[
 // users
 Route::get('/register','UsersController@register')->name('register');
 Route::post('/register','UsersController@registerPost')->name('register');
+Route::post('/upload', [
+    'middleware' => 'auth',
+    'uses' => 'UsersController@upload'
+])->name('user.upload.image');
+Route::get('/userd/settings',[
+    'middleware' => 'auth',
+    'uses' => 'UsersController@settings'
+])->name('register');
+
 // comps
 Route::get('/comp-register','CompController@register')->name('comp-register');
 Route::post('/comp-register','CompController@registerPost')->name('comp-register');
@@ -95,4 +104,6 @@ Route::get('/logout', function(){
     return redirect('/');
 })->name('logout');
 
+
+Route::get('/mail', 'IndexController@mail');
 ?>

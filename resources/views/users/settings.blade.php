@@ -1,6 +1,5 @@
 @extends('users.layout')
 @section('userd_content')
-    <form ng-controller="settingsController">
 	<div class="container">
 	    <div class="panel panel-default">
 		<div class="panel-heading"></div>
@@ -57,48 +56,177 @@
 		</div>
 	    </div>
 	</div>
-	<p>email: <input name="email" type="text" value=""/></p>
-	<p>password: <input name="password" type="password" value=""/></p>
+	<form id="user-setting-form">
+	    <p>email: <input name="email" type="text" value="{{$user->u_email}}"/></p>
+	<p>password: <input name="password" type="password" value="***"/></p>
 
-	<p>FName: <input name="fname" type="text" value=""/></p>
-	<p>LName: <input name="lname" type="text" value=""/></p>
-	<p>Father Name: <input name="father_name" type="text" value=""/></p>
-	<p>Location: <input name="location" type="text" value=""/></p>
+	<p>FName: <input name="fname" type="text" value="{{$user->u_fname}}"/></p>
+	<p>LName: <input name="lname" type="text" value="{{$user->u_lname}}"/></p>
+	<p>Father Name: <input name="father_name" type="text" value="{{$user->u_father_name}}"/></p>
 	
-	<p>BD: <input name="age" type="text" value=""/></p>
-	<p>Study Year: <input name="study_year" type="text" value=""/></p>
-	<select name="gender">
-	    <option value="0">Male</option>
-	    <option value="1">Female</option>
-	</select>
-	<select name="country">
-	    <option value="">country</option>
-	</select>
+	<p>BD: <input name="age" type="date" value="{{$user->u_age}}" format="yyyy-mm-dd"/></p>
+	<p>Study Year: <input name="study_year" type="text" value="{{$user->u_study_year}}"/></p>
+	<p>
+	    الحالة الاجتماعية
+	    <select name="user_status">
+		<option value="{{$user->u_status}}">{{ ($user->u_status == 0) ? 'Not Married' : 'Married' }}</option>
+		<option value="0">Not-Married</option>
+		<option value="1">Married</option>
+	    </select>
+	</p>
+	<p>
+	    الجنس
+	    <select name="gender">
+		<option value="{{$user->u_gender}}">{{ ($user->u_gender == 0) ? 'Male' : 'Female' }}</option>
+		<option value="0">Male</option>
+		<option value="1">Female</option>
+	    </select>
+	</p>
+	<p>
+	    البلد
+	    <select name="country">
+		@if($countryById($user->u_country) != null)
+		    <option value="{{$user->u_country}}">{{$countryById($user->u_country)->country_name}}</option>
+		@endif
+		@foreach($setting->countries as $country)
+		    @if($country['country_id'] == $countryById($user->u_country)->country_id)
+			@continue
+		    @endif
+			<option value="{{$country['country_id']}}">{{$country['country_name']}}</option>
+		@endforeach
+	    </select>
+	</p>
+	<p>
+	    المدينة
+	    <select name="city">
+		@if($cityById($user->u_city) != null)
+		    <option value="{{$user->u_city}}">{{$cityById($user->u_city)->city_name}}</option>
+		@endif
+		@foreach($setting->cities as $city)
+		    @if($cityById($user->u_city) != null && $city['city_id'] == $cityById($user->u_city)->city_id)
+			@continue
+		    @endif
+		    <option value="{{$city['city_id']}}">{{$city['city_name']}}</option>
+		@endforeach
+	    </select>
+	</p>
+	<p>Location: <input name="location" type="text" value="{{$user->u_location}}"/></p>
 	<br/>
-	<select name="lang">
-	    <option value="">Language</option>
-	</select>
+	
+	<p>
+	    اللغة
+	    <select name="lang">
+		@if($langById($user->u_lang) != null)
+		    <option value="{{$user->u_lang}}">{{$langById($user->u_lang)->lang_name}}</option>
+		@endif
+		@foreach($setting->langs as $lang)
+		    @if($langById($user->u_lang) != null && $lang['lang_id'] == $langById($user->u_lang)->lang_id)
+			@continue
+		    @endif
+		    <option value="{{$lang['lang_id']}}">{{$lang['lang_name']}}</option>
+		@endforeach
+	    </select>
+	</p>
 	<br/>
-	<select name="univer-name">
-	    <option value="">University</option>
-	</select>
+	<p>
+	    الجامعة
+	    <select name="univer_name">
+		<option value="{{$user->u_univ_name}}">{{$user->univer_name}}</option>
+		@foreach($setting->univers as $univer)
+		    @if($univer['univer_id'] == $user->u_univ_name)
+			@continue
+		    @endif
+		    <option value="{{$univer['univer_id']}}">{{$univer['univer_name']}}</option>
+		@endforeach
+	    </select>
+	</p>
 	<br/>
-	<select name="univer-class">
-	    <option value="">University Class</option>
-	</select>
+	<p>
+	    فرع الدراسة
+	    <select name="univer_sec">
+		<option value="{{$user->u_univ_sec}}">{{$user->univer_sec_name}}</option>
+		@foreach($setting->univer_sections as $univer_sec)
+		    @if($univer_sec['univer_sec_id'] == $user->u_univ_sec)
+			@continue
+		    @endif
+		    <option value="{{$univer_sec['univer_sec_id']}}">{{$univer_sec['univer_sec_name']}}</option>
+		@endforeach
+	    </select>
+	</p>
 	<br/>
-	<select name="study-city">
-	    <option value="">Study City</option>
-	</select>
+	<p>
+	    بلد الدراسة
+	    <select name="study_country">
+		<option value="{{$user->u_study_country}}">{{$user->country_name}}</option>
+		@foreach($setting->countries as $country)
+		    @if($country['country_id'] == $user->u_study_country)
+			@continue
+		    @endif
+		    <option value="{{$country['country_id']}}">{{$country['country_name']}}</option>
+		@endforeach
+	    </select>
+	<p>
+	    مدينة الدراسة
+	    <select name="study_city">
+		<option value="{{$user->u_study_city}}">{{$user->city_name}}</option>
+		@foreach($setting->cities as $city)
+		    @if($city['city_id'] == $user->u_study_city)
+			@continue
+		    @endif
+		    <option value="{{$city['city_id']}}">{{$city['city_name']}}</option>
+		@endforeach
+	    </select>
+	</p>
 	<br/>
-	<select name="study-lang">
-	    <option value="">Study Language</option>
-	</select>
+	<p>
+	    لغة الدراسة
+	    <select name="study_lang">
+		<option value="{{$user->u_study_lang}}">{{$user->lang_name}}</option>
+		@foreach($setting->langs as $lang)
+		    @if($lang['lang_id'] == $user->u_study_lang)
+			@continue
+		    @endif
+		    <option value="{{$lang['lang_id']}}">{{$lang['lang_name']}}</option>
+		@endforeach
+	    </select>
+	</p>
+	<p>
+	    التخصص
+	    <select name="study_class">
+		<option value="{{$user->u_study_class}}">{{$user->study_class_name}}</option>
+		@foreach($setting->study_classes as $study_class)
+		    @if($study_class['study_class_id'] == $user->u_study_class)
+			@continue
+		    @endif
+		    <option value="{{$study_class['study_class_id']}}">{{$study_class['study_class_name']}}</option>
+		@endforeach
+	    </select>
+	</p>
+	<p>
+	    مجال التطوع المفضل
+	    <input name="fav_work" type="text" value=""/>
+	</p>
 	<br/>
 	<br/>
+	{{ csrf_field() }}
 	<button>Save</button>
     </form>
     <script type="text/javascript">
+
+     $("#user-setting-form").submit(function(e){
+	 var formData = $("#user-setting-form").serialize();
+	 console.log(formData);
+	 $.ajax({
+	     type: 'POST',
+	     url: '{{route("update.user.settings")}}',
+	     data: formData,
+	     success: function(resp){
+		 if(resp.success == true){
+		     alert('Settings saved !!');
+		 }
+	     }
+	 });
+     });
      uploadImageCrop({
 	 aObject: 'pic',
 	 type: 'square',

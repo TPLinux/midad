@@ -1,4 +1,3 @@
-
 <?php
 
 /*
@@ -22,6 +21,11 @@ Route::get('/lang/{locale}',[
 // users
 Route::get('/register','UsersController@register')->name('register');
 Route::post('/register','UsersController@registerPost')->name('register');
+
+Route::post('/upload-user-settings', [
+    'middleware' => 'auth',
+    'uses' => 'UsersController@updateSettings'
+])->name('update.user.settings');
 
 Route::post('/upload-pic', [
     'middleware' => 'auth',

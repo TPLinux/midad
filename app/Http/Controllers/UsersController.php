@@ -4,10 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-
-use App\User;
+use DB;
 use App;
 use Auth;
+use App\User;
+use App\Country;
+use App\City;
+use App\Lang;
+use App\StudyClass;
+use App\Univer;
+use App\UniverSection;
 
 class UsersController extends Controller
 {
@@ -16,6 +22,100 @@ class UsersController extends Controller
         
     }
 
+    public function updateSettings(Request $req){
+        // return $req;
+        $data = [
+            'u_age' => $req->age,
+            'u_city' => $req->city,
+            'u_country' => $req->country,
+            'u_email' => $req->email,
+            'u_password' => sha1($req->password),
+            'u_fav_work' => $req->fav_work,
+            'u_gender' => $req->gender,
+            'u_status' => $req->user_status,
+            'u_lang' => $req->lang,
+            'u_location' => $req->location,
+            'u_fname' => $req->fname,
+            'u_lname' => $req->lname,
+            'u_father_name' => $req->father_name,
+            'u_study_city' => $req->study_city,
+            'u_study_class' => $req->study_class,
+            'u_study_country' => $req->study_country,
+            'u_study_lang' => $req->study_lang,
+            'u_study_year' => $req->study_year,
+            'u_univ_name' => $req->univer_name,
+            'u_univ_sec' => $req->univer_sec,
+        ];
+
+        User::where('u_id', Auth::user()->u_id)->update($data);
+        return [
+            'success' => true
+        ];
+    }
+
+    public function settings(){
+        $user = (object) Auth::user()->toArray();
+        $user = DB::table('users')
+              ->leftJoin('countries', 'countries.country_id' , '=', 'users.u_study_country')
+              ->leftJoin('cities', 'cities.city_id' , '=', 'users.u_study_city')
+              ->leftJoin('langs', 'langs.lang_id' , '=', 'users.u_study_lang')
+              ->leftJoin('univer_sections', 'univer_sections.univer_sec_id' , '=', 'users.u_univ_sec')
+              ->leftJoin('study_classes', 'study_classes.study_class_id' , '=', 'users.u_study_class')
+              ->leftJoin('univers', 'univers.univer_id' , '=', 'users.u_univ_name')
+              ->select('users.*', 'countries.*', 'cities.*', 'langs.*', 'univer_sections.*', 'univers.*', 'study_classes.*')
+              ->first();
+        
+        $countryById = function($id){
+            $country = Country::where('country_id', $id)->first();
+            if($country != null){
+                $country = (object) $country->toArray();
+                return $country;
+            }else
+                return null;
+        };
+
+        $cityById = function($id){
+            $city = City::where('city_id', $id)->first();
+            if($city != null){
+                $city = (object) $city->toArray();
+                return $city;
+            }else
+                return null;
+        };
+
+        $langById = function($id){
+            $lang = Lang::where('lang_id', $id)->first();
+            if($lang != null){
+                $lang = (object) $lang->toArray();
+                return $lang;
+            }else
+                return null;
+        };
+
+        $settingsInfo = (object) [
+            'countries' => Country::all()->toArray(),
+            'cities' => City::all()->toArray(),
+            'langs' => Lang::all()->toArray(),
+            'univers' => Univer::all()->toArray(),
+            'univer_sections' => UniverSection::all()->toArray(),
+            'study_classes' => StudyClass::all()->toArray(),
+        ];
+
+        if(!isset($_GET['api'])){
+            return view('users.settings')
+                ->with('countryById', $countryById)
+                ->with('cityById', $cityById)
+                ->with('langById', $langById)
+                ->with('user', $user)
+                ->with('setting', $settingsInfo);
+        }else{
+            return [
+                'user' => $user,
+                'settings' => $settingsInfo,
+            ];
+        }
+    }
+    
     public function uploadCover(Request $req){
         $custom_adds = mb_substr(sha1(sha1(Auth::user()->u_email) . time()), 0, 7) . "_" . mb_substr(md5(sha1(Auth::user()->u_email) . time() * time()), -10);
         $image = $this->uploadImageCrop($req->image, $custom_adds);
@@ -35,11 +135,6 @@ class UsersController extends Controller
         return ['success' => true];
     }
     
-    public function settings(){
-        $user = (object) Auth::user()->toArray();
-
-        return view('users.settings')->with('user', $user);
-    }
     
     public function userDB(){
         $user = Auth::user();

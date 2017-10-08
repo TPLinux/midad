@@ -16,12 +16,23 @@ class UsersController extends Controller
         
     }
 
+    public function uploadCover(Request $req){
+        $custom_adds = mb_substr(sha1(sha1(Auth::user()->u_email) . time()), 0, 7) . "_" . mb_substr(md5(sha1(Auth::user()->u_email) . time() * time()), -10);
+        $image = $this->uploadImageCrop($req->image, $custom_adds);
+        User::where('u_email',Auth::user()->u_email)->update([
+            'u_cover' => $image->image_name
+        ]);
+
+        return ['success' => true];
+    }
+    
     public function upload(Request $req){
-        $koko = mb_substr(sha1(sha1(Auth::user()->u_email) . time()), 0, 7) . "_" . mb_substr(md5(sha1(Auth::user()->u_email) . time() * time()), -10);
-        $image = $this->uploadImageCrop($req->image, $koko);
+        $custom_adds = mb_substr(sha1(sha1(Auth::user()->u_email) . time()), 0, 7) . "_" . mb_substr(md5(sha1(Auth::user()->u_email) . time() * time()), -10);
+        $image = $this->uploadImageCrop($req->image, $custom_adds);
         User::where('u_email',Auth::user()->u_email)->update([
             'u_pic' => $image->image_name
         ]);
+        return ['success' => true];
     }
     
     public function settings(){

@@ -1,3 +1,4 @@
+
 <?php
 
 /*
@@ -21,10 +22,18 @@ Route::get('/lang/{locale}',[
 // users
 Route::get('/register','UsersController@register')->name('register');
 Route::post('/register','UsersController@registerPost')->name('register');
-Route::post('/upload', [
+
+Route::post('/upload-pic', [
     'middleware' => 'auth',
     'uses' => 'UsersController@upload'
-])->name('user.upload.image');
+])->name('user.upload.pic');
+
+Route::post('/upload-cover', [
+    'middleware' => 'auth',
+    'uses' => 'UsersController@uploadCover'
+])->name('user.upload.cover');
+
+
 Route::get('/userd/settings',[
     'middleware' => 'auth',
     'uses' => 'UsersController@settings'

@@ -1,7 +1,8 @@
 function uploadImageCrop(oo){
+    var aObject = oo.aObject;
     var theType = oo.type || 'square';
-    var aWidth = oo.width || 200;
-    var aHeight = oo.height || 200;
+    var aWidth = oo.aWidth || 200;
+    var aHeight = oo.aHeight || 200;
     var bWidth = oo.bWidth || 300;
     var bHeight = oo.bHeight || 300;
     var editDivSelector = oo.editDivSelector || '';
@@ -11,7 +12,7 @@ function uploadImageCrop(oo){
     var uploadBtnSelector = oo.uploadBtnSelector || '';
     var viewSelector = oo.viewSelector || '';
     
-    $uploadCrop = $(editDivSelector).croppie({
+    window[aObject] = $(editDivSelector).croppie({
 	enableExif: true,
 	viewport: {
 	    width: aWidth,
@@ -23,11 +24,11 @@ function uploadImageCrop(oo){
 	    height: bHeight
 	}
     });
-
+    console.log(window[aObject]);
     $(inputFileSelector).on('change', function () { 
 	var reader = new FileReader();
 	reader.onload = function (e) {
-    	    $uploadCrop.croppie('bind', {
+    	    window[aObject].croppie('bind', {
     		url: e.target.result
     	    }).then(function(){
     		console.log('jQuery bind complete');
@@ -37,7 +38,7 @@ function uploadImageCrop(oo){
     });
 
     $(uploadBtnSelector).on('click', function (ev) {
-	$uploadCrop.croppie('result', {
+	window[aObject].croppie('result', {
 	    type: 'canvas',
 	    size: 'viewport'
 	}).then(function (resp) {

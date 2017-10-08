@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->increments('u_id');
             $table->string('u_fname');
             $table->string('u_lname');
+            $table->string('u_father_name')->nullable();
             $table->date('u_age')->nullable();
             $table->string('u_study_year')->nullable();
 

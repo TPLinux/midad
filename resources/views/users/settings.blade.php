@@ -194,6 +194,7 @@
 	    التخصص
 	    <select name="study_class">
 		<option value="{{$user->u_study_class}}">{{$user->study_class_name}}</option>
+		<option value="{{$user->u_study_class}}">{{$user->study_class_name}}</option>
 		@foreach($setting->study_classes as $study_class)
 		    @if($study_class['study_class_id'] == $user->u_study_class)
 			@continue
@@ -204,7 +205,7 @@
 	</p>
 	<p>
 	    مجال التطوع المفضل
-	    <input name="fav_work" type="text" value=""/>
+	    <input name="fav_work" type="text" value="{{$user->u_fav_work}}"/>
 	</p>
 	<br/>
 	<br/>

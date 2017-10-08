@@ -194,7 +194,6 @@
 	    التخصص
 	    <select name="study_class">
 		<option value="{{$user->u_study_class}}">{{$user->study_class_name}}</option>
-		<option value="{{$user->u_study_class}}">{{$user->study_class_name}}</option>
 		@foreach($setting->study_classes as $study_class)
 		    @if($study_class['study_class_id'] == $user->u_study_class)
 			@continue

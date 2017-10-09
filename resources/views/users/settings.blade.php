@@ -57,8 +57,15 @@
 	    </div>
 	</div>
 	<form id="user-setting-form">
+	    <style>
+	     .red_input{
+		 color:white;
+		 background:red;
+	     }
+	    </style>
+	    <p>username: <input class="username-input" name="username" type="text" value="{{$user->u_username}}"/></p>
 	    <p>email: <input name="email" type="text" value="{{$user->u_email}}"/></p>
-	<p>password: <input name="password" type="password" value="***"/></p>
+	    <p>password: <input name="password" type="password" value="***"/></p>
 
 	<p>FName: <input name="fname" type="text" value="{{$user->u_fname}}"/></p>
 	<p>LName: <input name="lname" type="text" value="{{$user->u_lname}}"/></p>
@@ -221,8 +228,14 @@
 	     url: '{{route("update.user.settings")}}',
 	     data: formData,
 	     success: function(resp){
+		 console.log(resp);
 		 if(resp.success == true){
 		     alert('Settings saved !!');
+		     if(resp.username == false){
+			 $('.username-input').addClass('red_input');
+		     }else{
+			 $('.username-input').removeClass('red_input');
+		     }
 		 }
 	     }
 	 });

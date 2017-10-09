@@ -13,6 +13,9 @@
 
 
 Route::get('/','IndexController@index')->name('index');
+Route::get('/users/{username}',[
+    'uses' => 'IndexController@showUserProfile'
+])->name('show.user');
 
 Route::get('/lang/{locale}',[
     'uses' => 'LanguageController@switchLang',

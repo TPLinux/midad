@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
              * Tables must be exists: univer_classes, countries, cities, langs, univers, teams
              */
             $table->increments('u_id');
+            $table->string('u_username')->nullable();
             $table->string('u_fname');
             $table->string('u_lname');
             $table->string('u_father_name')->nullable();

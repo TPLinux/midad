@@ -10,6 +10,7 @@ use Auth;
 use App\Univer;
 use App\Country;
 use App\Lang;
+use App\User;
 
 class IndexController extends Controller
 {
@@ -38,6 +39,15 @@ class IndexController extends Controller
         return view('welcome')->with('user_in', $user_in)->with('reg', $reg_info)->with('panel', $panel);
     }
 
+    public function showUserProfile($username){
+        $user = User::where('u_username',$username)->first();
+        if($user != null)
+            $user = (object) $user->toArray();
+        else
+            return view('errors.not_exists');
+        return view('show_user')->with('user', $user);
+    }
+    
     public function mail(){
         Mail::send('emails.confirm', [
             'theRoute' => 'confirm/user/123123'

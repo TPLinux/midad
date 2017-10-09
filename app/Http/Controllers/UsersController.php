@@ -24,7 +24,21 @@ class UsersController extends Controller
 
     public function updateSettings(Request $req){
         // return $req;
+        $username_exists = User::where('u_username', $req->username)->first();
+
+        if($username_exists != null){
+            $new_user = Auth::user()->u_username;
+            $user_msg = false;
+        }else{
+            $new_user = $req->username;
+            $user_msg = true;
+        }
+
+        if($req->username == Auth::user()->u_username)
+            $user_msg = 'same';
+        
         $data = [
+            'u_username' => $new_user,
             'u_age' => $req->age,
             'u_city' => $req->city,
             'u_country' => $req->country,
@@ -49,7 +63,8 @@ class UsersController extends Controller
 
         User::where('u_id', Auth::user()->u_id)->update($data);
         return [
-            'success' => true
+            'success' => true,
+            'username' => $user_msg
         ];
     }
 
@@ -63,6 +78,8 @@ class UsersController extends Controller
               ->leftJoin('study_classes', 'study_classes.study_class_id' , '=', 'users.u_study_class')
               ->leftJoin('univers', 'univers.univer_id' , '=', 'users.u_univ_name')
               ->select('users.*', 'countries.*', 'cities.*', 'langs.*', 'univer_sections.*', 'univers.*', 'study_classes.*')
+              ->where('users.u_email', $user->u_email)
+              ->where('users.u_id', $user->u_id)
               ->first();
         
         $countryById = function($id){
@@ -186,6 +203,7 @@ class UsersController extends Controller
     public function loginPost(Request $req){
 
         $auth = User::where('u_email',$req->email)->where('u_password',sha1($req->password))->first();
+        
         if($auth){
             if(request('remember') == true || request('remember') == false)
                 $remember = request('remember');

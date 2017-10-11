@@ -1,8 +1,3 @@
-@if($user_in == true)
-    <script>
-     window.location.href = '{{ $panel }}';
-    </script>
-@endif
 <!DOCTYPE html>
 <html  ng-app="app" >
 

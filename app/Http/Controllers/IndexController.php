@@ -25,18 +25,22 @@ class IndexController extends Controller
             $user_in = true;
         else
             $user_in = false;
-
+        
         if(Auth::check())
             $panel = 'userd';
         
-        if(Auth::guard('admin')->check())
+        elseif(Auth::guard('admin')->check())
             $panel = 'admind';
         
-        if(Auth::guard('comp')->check())
+        elseif(Auth::guard('comp')->check())
             $panel = 'compd';
         else
             $panel = '';
-        return view('welcome')->with('user_in', $user_in)->with('reg', $reg_info)->with('panel', $panel);
+        
+        if($user_in == true)
+            return redirect('/'. $panel);
+        else
+            return view('welcome')->with('user_in', $user_in)->with('reg', $reg_info)->with('panel', $panel);
     }
 
     public function showUserProfile($username){

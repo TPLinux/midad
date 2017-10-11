@@ -16,18 +16,19 @@ class CompController extends Controller
 {
     public function updateSettings(Request $req){
         // return $req;
-        $username_exists = Company::where('comp_username', $req->comp_username)->first();
+        $username_exists = Company::where('comp_username', $req->username)->first();
 
         if($username_exists != null){
             $new_user = Auth::guard('comp')->user()->comp_username;
             $comp_msg = false;
         }else{
-            $new_user = $req->comp_username;
+            $new_user = $req->username;
             $comp_msg = true;
         }
 
         if($req->username == Auth::guard('comp')->user()->comp_username)
             $comp_msg = 'same';
+
         
         $data = [
             'comp_username' => $new_user,

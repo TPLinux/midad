@@ -72,7 +72,7 @@
 	<input type="text" name="name_en" value="{{$comp->comp_name_en}}">
 	<br/>
 	username
-	<input type="text" class="username-input" name="comp_username" value="{{$comp->comp_username}}">
+	<input type="text" class="username-input" name="username" value="{{$comp->comp_username}}">
 	<br>
 	مجال عمل الشركة
 	<select name="work">
@@ -126,7 +126,7 @@
 	</select>
 	<br>
 	العنوان
-	<input name="location" type="text" value="{{$city->city_location}}"/>
+	<input name="location" type="text" value="{{$comp->comp_location}}"/>
 	<br/>
 	<br/>
 	{{ csrf_field() }}

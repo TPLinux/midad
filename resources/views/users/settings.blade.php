@@ -1,71 +1,70 @@
 @extends('users.layout')
 @section('userd_content')
-	<div class="container">
-	    <div class="panel panel-default">
-		<div class="panel-heading"></div>
-		<div class="panel-body">
-
-	  	    <div class="row">
-	  		<div class="col-md-4 text-center">
-			    <div id="upload-demo-cover" style="width:350px"></div>
-	  		</div>
-	  		<div class="col-md-4" style="padding-top:30px;">
-			    <br/><br/><br/>
-			    <br/><br/><br/>
-			    <br/><br/><br/>
-			    <br/><br/><br/>
-			    <br/><br/><br/>
-			    <strong>Select Image:</strong>
-			    <input type="file" id="upload-cover">
-			    <br/>
-			    <button class="btn btn-success upload-result-cover">Upload Image</button>
-	  		</div>
-
-	  		<div class="col-md-4" style="">
-			    <div id="upload-demo-i-cover" style="background:#e1e1e1;width:300px;padding:30px;height:300px;margin-top:30px">
-				<img alt="" src="{{ asset('public' . $user->u_cover) }}"/>
-			    </div>
-	  		</div>
+    <div class="container">
+	<div class="panel panel-default">
+	    <div class="panel-heading"></div>
+	    <div class="panel-body">
+	  	<div class="row">
+	  	    <div class="col-md-4 text-center">
+			<div id="upload-demo-cover" style="width:350px"></div>
+	  	    </div>
+	  	    <div class="col-md-4" style="padding-top:30px;">
+			<br/><br/><br/>
+			<br/><br/><br/>
+			<br/><br/><br/>
+			<br/><br/><br/>
+			<br/><br/><br/>
+			<strong>Select Image:</strong>
+			<input type="file" id="upload-cover">
+			<br/>
+			<button class="btn btn-success upload-result-cover">Upload Image</button>
 	  	    </div>
 
-		</div>
-	    </div>
-	    <div class="panel panel-default">
-		<div class="panel-heading"></div>
-		<div class="panel-body">
-
-	  	    <div class="row">
-	  		<div class="col-md-4 text-center">
-			    <div id="upload-demo" style="width:350px"></div>
-	  		</div>
-	  		<div class="col-md-4" style="padding-top:30px;">
-			    <strong>Select Image:</strong>
-			    <br/>
-			    <input type="file" id="upload" onclick="">
-			    <br/>
-			    <button class="btn btn-success upload-result">Upload Image</button>
-	  		</div>
-
-	  		<div class="col-md-4" style="">
-			    <div id="upload-demo-i" style="background:#e1e1e1;width:300px;padding:30px;height:300px;margin-top:30px">
-				<img alt="" src="{{ asset('public' . $user->u_pic) }}"/>
-			    </div>
-	  		</div>
+	  	    <div class="col-md-4" style="">
+			<div id="upload-demo-i-cover" style="background:#e1e1e1;width:300px;padding:30px;height:300px;margin-top:30px">
+			    <img alt="" src="{{ asset('public' . $user->u_cover) }}"/>
+			</div>
 	  	    </div>
+	  	</div>
 
-		</div>
 	    </div>
 	</div>
-	<form id="user-setting-form">
-	    <style>
-	     .red_input{
-		 color:white;
-		 background:red;
-	     }
-	    </style>
-	    <p>username: <input class="username-input" name="username" type="text" value="{{$user->u_username}}"/></p>
-	    <p>email: <input name="email" type="text" value="{{$user->u_email}}"/></p>
-	    <p>password: <input name="password" type="password" value="***"/></p>
+	<div class="panel panel-default">
+	    <div class="panel-heading"></div>
+	    <div class="panel-body">
+
+	  	<div class="row">
+	  	    <div class="col-md-4 text-center">
+			<div id="upload-demo" style="width:350px"></div>
+	  	    </div>
+	  	    <div class="col-md-4" style="padding-top:30px;">
+			<strong>Select Image:</strong>
+			<br/>
+			<input type="file" id="upload" onclick="">
+			<br/>
+			<button class="btn btn-success upload-result">Upload Image</button>
+	  	    </div>
+
+	  	    <div class="col-md-4" style="">
+			<div id="upload-demo-i" style="background:#e1e1e1;width:300px;padding:30px;height:300px;margin-top:30px">
+			    <img alt="" src="{{ asset('public' . $user->u_pic) }}"/>
+			</div>
+	  	    </div>
+	  	</div>
+
+	    </div>
+	</div>
+    </div>
+    <form id="user-setting-form">
+	<style>
+	 .red_input{
+	     color:white;
+	     background:red;
+	 }
+	</style>
+	<p>username: <input class="username-input" name="username" type="text" value="{{$user->u_username}}"/></p>
+	<p>email: <input name="email" type="text" value="{{$user->u_email}}"/></p>
+	<p>password: <input name="password" type="password" value="***"/></p>
 
 	<p>FName: <input name="fname" type="text" value="{{$user->u_fname}}"/></p>
 	<p>LName: <input name="lname" type="text" value="{{$user->u_lname}}"/></p>
@@ -99,7 +98,7 @@
 		    @if($country['country_id'] == $countryById($user->u_country)->country_id)
 			@continue
 		    @endif
-			<option value="{{$country['country_id']}}">{{$country['country_name']}}</option>
+		    <option value="{{$country['country_id']}}">{{$country['country_name']}}</option>
 		@endforeach
 	    </select>
 	</p>
@@ -172,51 +171,51 @@
 		    <option value="{{$country['country_id']}}">{{$country['country_name']}}</option>
 		@endforeach
 	    </select>
-	<p>
-	    مدينة الدراسة
-	    <select name="study_city">
-		<option value="{{$user->u_study_city}}">{{$user->city_name}}</option>
-		@foreach($setting->cities as $city)
-		    @if($city['city_id'] == $user->u_study_city)
-			@continue
-		    @endif
-		    <option value="{{$city['city_id']}}">{{$city['city_name']}}</option>
-		@endforeach
-	    </select>
-	</p>
-	<br/>
-	<p>
-	    لغة الدراسة
-	    <select name="study_lang">
-		<option value="{{$user->u_study_lang}}">{{$user->lang_name}}</option>
-		@foreach($setting->langs as $lang)
-		    @if($lang['lang_id'] == $user->u_study_lang)
-			@continue
-		    @endif
-		    <option value="{{$lang['lang_id']}}">{{$lang['lang_name']}}</option>
-		@endforeach
-	    </select>
-	</p>
-	<p>
-	    التخصص
-	    <select name="study_class">
-		<option value="{{$user->u_study_class}}">{{$user->study_class_name}}</option>
-		@foreach($setting->study_classes as $study_class)
-		    @if($study_class['study_class_id'] == $user->u_study_class)
-			@continue
-		    @endif
-		    <option value="{{$study_class['study_class_id']}}">{{$study_class['study_class_name']}}</option>
-		@endforeach
-	    </select>
-	</p>
-	<p>
-	    مجال التطوع المفضل
-	    <input name="fav_work" type="text" value="{{$user->u_fav_work}}"/>
-	</p>
-	<br/>
-	<br/>
-	{{ csrf_field() }}
-	<button>Save</button>
+	    <p>
+		مدينة الدراسة
+		<select name="study_city">
+		    <option value="{{$user->u_study_city}}">{{$user->city_name}}</option>
+		    @foreach($setting->cities as $city)
+			@if($city['city_id'] == $user->u_study_city)
+			    @continue
+			@endif
+			<option value="{{$city['city_id']}}">{{$city['city_name']}}</option>
+		    @endforeach
+		</select>
+	    </p>
+	    <br/>
+	    <p>
+		لغة الدراسة
+		<select name="study_lang">
+		    <option value="{{$user->u_study_lang}}">{{$user->lang_name}}</option>
+		    @foreach($setting->langs as $lang)
+			@if($lang['lang_id'] == $user->u_study_lang)
+			    @continue
+			@endif
+			<option value="{{$lang['lang_id']}}">{{$lang['lang_name']}}</option>
+		    @endforeach
+		</select>
+	    </p>
+	    <p>
+		التخصص
+		<select name="study_class">
+		    <option value="{{$user->u_study_class}}">{{$user->study_class_name}}</option>
+		    @foreach($setting->study_classes as $study_class)
+			@if($study_class['study_class_id'] == $user->u_study_class)
+			    @continue
+			@endif
+			<option value="{{$study_class['study_class_id']}}">{{$study_class['study_class_name']}}</option>
+		    @endforeach
+		</select>
+	    </p>
+	    <p>
+		مجال التطوع المفضل
+		<input name="fav_work" type="text" value="{{$user->u_fav_work}}"/>
+	    </p>
+	    <br/>
+	    <br/>
+	    {{ csrf_field() }}
+	    <button>Save</button>
     </form>
     <script type="text/javascript">
 

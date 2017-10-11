@@ -22,4 +22,8 @@ class Company extends Authenticatable
         'comp_password',
         
     ];
+
+    protected $hidden = [
+        'comp_password'
+    ];
 }

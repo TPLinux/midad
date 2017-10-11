@@ -25,7 +25,7 @@ Route::get('/lang/{locale}',[
 Route::get('/register','UsersController@register')->name('register');
 Route::post('/register','UsersController@registerPost')->name('register');
 
-Route::post('/upload-user-settings', [
+Route::post('/update-user-settings', [
     'middleware' => 'auth',
     'uses' => 'UsersController@updateSettings'
 ])->name('update.user.settings');
@@ -44,7 +44,27 @@ Route::post('/upload-cover', [
 Route::get('/userd/settings',[
     'middleware' => 'auth',
     'uses' => 'UsersController@settings'
-])->name('register');
+])->name('user.settings');
+
+Route::post('/update-comp-settings', [
+    'middleware' => 'comp',
+    'uses' => 'CompController@updateSettings'
+])->name('update.comp.settings');
+
+Route::post('/upload-pic', [
+    'middleware' => 'comp',
+    'uses' => 'CompController@upload'
+])->name('comp.upload.pic');
+
+Route::post('/upload-cover', [
+    'middleware' => 'comp',
+    'uses' => 'CompController@uploadCover'
+])->name('comp.upload.cover');
+
+Route::get('/compd/settings',[
+    'middleware' => 'comp',
+    'uses' => 'CompController@settings'
+])->name('comp.settings');
 
 // comps
 Route::get('/comp-register','CompController@register')->name('comp-register');

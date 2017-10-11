@@ -20,6 +20,7 @@
     </head>
     <body>
 	<a href="{{route('logout')}}">Logout</a>
+	<a href="{{route('user.settings')}}">settings</a>
 	<br/>
 	@yield('userd_content')
 	<script src="{{ asset('public/js/jquery-1.12.4.min.js') }}"></script>

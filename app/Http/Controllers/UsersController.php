@@ -69,7 +69,14 @@ class UsersController extends Controller
     }
 
     public function settings(){
+        $bon_po = 100;
         $user = (object) Auth::user()->toArray();
+        $fields = 27;
+        $nulls = -2;
+        foreach($user as $item){
+            if($item == null)
+                $nulls += 1;
+        }
         $user = DB::table('users')
               ->leftJoin('countries', 'countries.country_id' , '=', 'users.u_study_country')
               ->leftJoin('cities', 'cities.city_id' , '=', 'users.u_study_city')
@@ -82,6 +89,13 @@ class UsersController extends Controller
               ->where('users.u_id', $user->u_id)
               ->first();
         
+        $user->nulls = $nulls;
+        $user->profile_percent = intval((($fields - $user->nulls) / $fields) * 100);
+        if($user->profile_percent == 100){
+            User::where('u_id', $user->u_id)->where('u_email', $user->u_email)->update([
+                'u_points' => $user->u_points + $bon_po
+            ]);
+        }
         $countryById = function($id){
             $country = Country::where('country_id', $id)->first();
             if($country != null){

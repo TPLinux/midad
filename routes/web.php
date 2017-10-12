@@ -32,7 +32,7 @@ Route::post('/update-user-settings', [
 
 Route::post('/upload-pic', [
     'middleware' => 'auth',
-    'uses' => 'UsersController@upload'
+    'uses' => 'UsersController@upload',
 ])->name('user.upload.pic');
 
 Route::post('/upload-cover', [
@@ -51,12 +51,12 @@ Route::post('/update-comp-settings', [
     'uses' => 'CompController@updateSettings'
 ])->name('update.comp.settings');
 
-Route::post('/upload-pic', [
+Route::post('/upload-pic-comp', [
     'middleware' => 'comp',
     'uses' => 'CompController@upload'
 ])->name('comp.upload.pic');
 
-Route::post('/upload-cover', [
+Route::post('/upload-cover-comp', [
     'middleware' => 'comp',
     'uses' => 'CompController@uploadCover'
 ])->name('comp.upload.cover');

@@ -1,5 +1,10 @@
 @extends('users.layout')
 @section('userd_content')
+    <h1>
+	@if($user->profile_percent < 100)
+	    معلوماتك الشخصية كاملة بنسبة {{$user->profile_percent}}%
+	@endif
+    </h1>
     <div class="container">
 	<div class="panel panel-default">
 	    <div class="panel-heading"></div>

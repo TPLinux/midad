@@ -51,6 +51,24 @@ Route::post('/update-comp-settings', [
     'uses' => 'CompController@updateSettings'
 ])->name('update.comp.settings');
 
+
+Route::post('/new-service', [
+    'middleware' => 'comp',
+    'uses' => 'CompController@newService'
+])->name('new-service');
+
+Route::get('/new-service', [
+    'middleware' => 'comp',
+    'uses' => function(){
+        return '';
+    }
+])->name('new-service');
+
+Route::post('/upload-serv-logo', [
+    'middleware' => 'comp',
+    'uses' => 'CompController@uploadServiceLogo'
+])->name('service.upload.logo');
+
 Route::post('/upload-pic-comp', [
     'middleware' => 'comp',
     'uses' => 'CompController@upload'

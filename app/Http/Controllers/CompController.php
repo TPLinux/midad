@@ -8,12 +8,25 @@ use App\Company;
 use App\Work;
 use App\City;
 use App\Country;
+use App\Service;
 use DB;
 use Auth;
 use App;
 
 class CompController extends Controller
 {
+    
+    public function compDB(){
+        $comp = Auth::guard('comp')->user();
+        $countries = Country::all();
+        $cities = City::all();
+
+        return view('comps.index')
+            ->with('cities', $cities)
+            ->with('countries', $countries)
+            ->with('comp', (object) $comp->toArray());
+    }
+    
     public function updateSettings(Request $req){
         // return $req;
         $username_exists = Company::where('comp_username', $req->username)->first();
@@ -25,7 +38,7 @@ class CompController extends Controller
             $new_user = $req->username;
             $comp_msg = true;
         }
-
+        
         if($req->username == Auth::guard('comp')->user()->comp_username)
             $comp_msg = 'same';
 
@@ -92,18 +105,42 @@ class CompController extends Controller
         ]);
         return ['success' => true];
     }
+
+    public function newService(Request $rq){
+        $data = [
+            'serv_name' => $rq->name,
+            'serv_points' => $rq->points,
+            'serv_location' => $rq->location,
+            'serv_country' => $rq->country,
+            'serv_city' => $rq->city,
+            'serv_range' => $rq->range,
+            'serv_desc' => $rq->desc,
+            'serv_comp' => Auth::guard('comp')->user()->comp_id,
+        ];
+
+        if($rq->range == '1'){
+            $data['serv_start_date'] = $rq->start_date;
+            $data['serv_end_date'] = $rq->end_date;
+        }
+        
+        Service::insert($data);
+        return [
+            'success' => true
+        ];
+    }
+    
+    public function uploadServiceLogo(Request $req){
+        $last_serv = Service::where('serv_comp',Auth::guard('comp')->user()->comp_id)->orderby('serv_id', 'desc')->first();
+        $custom_adds = mb_substr(sha1(sha1(Auth::guard('comp')->user()->comp_email) . time()), 0, 7) . "_" . mb_substr(md5(sha1(Auth::guard('comp')->user()->comp_email) . time() * time()), -10);
+        $image = $this->uploadImageCrop($req->image, $custom_adds);
+        Service::where('serv_comp',Auth::guard('comp')->user()->comp_id)->where('serv_id', $last_serv->serv_id)->update([
+            'serv_logo' => $image->image_name
+        ]);
+        return ['success' => true];
+    }
     
     public function login(){
         return view('comps.login')->with('user_in', $this->user_in);;
-    }
-
-    public function compDB(){
-        $comp = Auth::guard('comp')->user();
-        return view('comps.compd')->with('comp', (object) $comp->toArray());
-        echo '<h2>Comp panel</h2>';
-        echo "Your email is: " . $comp->comp_email;
-        echo "<br/>";
-        echo '';
     }
     
     public function loginPost(Request $req){

@@ -107,6 +107,7 @@ class CompController extends Controller
     }
 
     public function newService(Request $rq){
+        if(Auth::guard('comp')->user()->comp_sort == 'doner_comp' || Auth::guard('comp')->user()->comp_sort == 'both_comp'){
         $data = [
             'serv_name' => $rq->name,
             'serv_points' => $rq->points,
@@ -125,8 +126,15 @@ class CompController extends Controller
         
         Service::insert($data);
         return [
+            'msg' => 'created',
             'success' => true
         ];
+        }else{
+            return [
+                'msg' => "Unable to create new service  , you have no permissions",
+                'success' => false
+            ];
+        }
     }
     
     public function uploadServiceLogo(Request $req){

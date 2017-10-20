@@ -103,3 +103,4 @@
 	 theToken: '{{ csrf_token() }}'
      });
     </script>
+</div>

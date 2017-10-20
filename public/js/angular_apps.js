@@ -73,6 +73,10 @@ app.controller('compRegisterController', ['$scope', '$http', function($scope, $h
 	compSort = document.getElementById('comp_sort');
 	compSort = compSort.options[compSort.selectedIndex].value;
 
+	if(compType != 'gov_comp' && compSort == 'both_comp'){
+	    alert('Just Government Units can take both (Doner, benefits)');
+	}
+	
 	if($scope.laccept != true){
 	    alert('يجب عليك الموافقة على الشرط والاحكام');
 	    return

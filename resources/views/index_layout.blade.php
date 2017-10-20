@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="{{ asset('public/css/animate.css') }}">
         <link rel="stylesheet" href="{{ asset('public/css/selectize.css') }}">
 	<link rel="stylesheet" href="{{ asset('public/css/style.css') }}">
+	<script src="{{ asset('public/js/jquery-1.12.4.min.js') }}"></script>
 	<script src="{{ asset('public/js/angular.min.js') }}"></script>	
     </head>
 
@@ -205,6 +206,8 @@
                                     </div>
                                     <div class="clear"></div>
                                     <div>
+					<script>
+					</script>
 					<select id="comp_type" class="selectsearch">
 					    <option value="">نوع المؤسسة أو الشركة</option>
                                             <option value="org_comp">منظمة مجتمع مدني</option>
@@ -216,9 +219,9 @@
                                     <div>
 					<select id="comp_sort" class="selectsearch">
 					    <option value="">التصنيف</option>
-                                            <option value="doner_comp">مقدمة خدمة</option>
-                                            <option value="bene_comp">طالبة تطوع</option>
-                                            <option value="both_comp">مقدمة خدمة وطالبة تطوع</option>
+                                            <option id="doner_comp" value="doner_comp">مقدمة خدمة</option>
+                                            <option id="bene_comp" value="bene_comp">طالبة تطوع</option>
+                                            <option id="both_comp" value="both_comp">مقدمة خدمة وطالبة تطوع</option>
 					</select>
                                     </div>
                                     <div>

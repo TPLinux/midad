@@ -13,99 +13,45 @@
 
 
 Route::get('/','IndexController@index')->name('index');
-Route::get('/users/{username}',[
-    'uses' => 'IndexController@showUserProfile'
-])->name('show.user');
+Route::get('/users/{username}',['uses' => 'IndexController@showUserProfile'])->name('show.user');
+// lang
+Route::get('/lang/{locale}',['uses' => 'LanguageController@switchLang','as' => 'lang.switch']);
 
-Route::get('/lang/{locale}',[
-    'uses' => 'LanguageController@switchLang',
-    'as' => 'lang.switch'
-]);
+
 // users
 Route::get('/register','UsersController@register')->name('register');
 Route::post('/register','UsersController@registerPost')->name('register');
-
-Route::post('/update-user-settings', [
-    'middleware' => 'auth',
-    'uses' => 'UsersController@updateSettings'
-])->name('update.user.settings');
-
-Route::post('/upload-pic', [
-    'middleware' => 'auth',
-    'uses' => 'UsersController@upload',
-])->name('user.upload.pic');
-
-Route::post('/upload-cover', [
-    'middleware' => 'auth',
-    'uses' => 'UsersController@uploadCover'
-])->name('user.upload.cover');
-
-
-Route::get('/userd/settings',[
-    'middleware' => 'auth',
-    'uses' => 'UsersController@settings'
-])->name('user.settings');
-
-Route::post('/update-comp-settings', [
-    'middleware' => 'comp',
-    'uses' => 'CompController@updateSettings'
-])->name('update.comp.settings');
-
-
-Route::post('/new-service', [
-    'middleware' => 'comp',
-    'uses' => 'CompController@newService'
-])->name('new-service');
-
-Route::get('/new-service', [
-    'middleware' => 'comp',
-    'uses' => function(){
-        return '';
-    }
-])->name('new-service');
-
-Route::post('/upload-serv-logo', [
-    'middleware' => 'comp',
-    'uses' => 'CompController@uploadServiceLogo'
-])->name('service.upload.logo');
-
-Route::post('/upload-pic-comp', [
-    'middleware' => 'comp',
-    'uses' => 'CompController@upload'
-])->name('comp.upload.pic');
-
-Route::post('/upload-cover-comp', [
-    'middleware' => 'comp',
-    'uses' => 'CompController@uploadCover'
-])->name('comp.upload.cover');
-
-Route::get('/compd/settings',[
-    'middleware' => 'comp',
-    'uses' => 'CompController@settings'
-])->name('comp.settings');
-
-// comps
-Route::get('/comp-register','CompController@register')->name('comp-register');
-Route::post('/comp-register','CompController@registerPost')->name('comp-register');
-
+Route::post('/update-user-settings', ['middleware' => 'auth','uses' => 'UsersController@updateSettings'])->name('update.user.settings');
+Route::post('/upload-pic', ['middleware' => 'auth','uses' => 'UsersController@upload',])->name('user.upload.pic');
+Route::post('/upload-cover', ['middleware' => 'auth','uses' => 'UsersController@uploadCover'])->name('user.upload.cover');
+Route::get('/userd/settings',['middleware' => 'auth','uses' => 'UsersController@settings'])->name('user.settings');
 // users login
 Route::get('/login','UsersController@login')->name('login');
-Route::post('/login',[
-    'uses' => 'UsersController@loginPost',
-    'as' => 'login.user'
-]);
+Route::post('/login',['uses' => 'UsersController@loginPost','as' => 'login.user']);
+
+
+
+// comps
+Route::post('/update-comp-settings', ['middleware' => 'comp','uses' => 'CompController@updateSettings'])->name('update.comp.settings');
+Route::post('/new-service', ['middleware' => 'comp','uses' => 'CompController@newService'])->name('new-service');
+Route::post('/new-miss', ['middleware' => 'comp','uses' => 'CompController@newMiss'])->name('new-miss');
+Route::get('/new-service', ['middleware' => 'comp','uses' => function(){ return '';}])->name('new-service');
+Route::post('/upload-pic-comp', ['middleware' => 'comp','uses' => 'CompController@upload'])->name('comp.upload.pic');
+Route::post('/upload-cover-comp', ['middleware' => 'comp','uses' => 'CompController@uploadCover'])->name('comp.upload.cover');
+Route::get('/compd/settings',['middleware' => 'comp','uses' => 'CompController@settings'])->name('comp.settings');
+Route::get('/comp-register','CompController@register')->name('comp-register');
+Route::post('/comp-register','CompController@registerPost')->name('comp-register');
+// logo miss / service
+Route::post('/upload-serv-logo', ['middleware' => 'comp','uses' => 'CompController@uploadServiceLogo'])->name('service.upload.logo');
+Route::post('/upload-miss-logo', ['middleware' => 'comp','uses' => 'CompController@uploadMissLogo'])->name('miss.upload.logo');
 // comps login
 Route::get('/comp-login','CompController@login')->name('login.comp');
-Route::post('/comp-login',[
-    'uses' => 'CompController@loginPost',
-    'as' => 'login.comp'
-]);
+Route::post('/comp-login',['uses' => 'CompController@loginPost','as' => 'login.comp']);
 
+
+// admin login
 Route::get('/admin-login','AdminController@login');
-Route::post('/admin-login',[
-    'uses' => 'AdminController@loginPost',
-    'as' => 'login.admin'
-]);
+Route::post('/admin-login',['uses' => 'AdminController@loginPost','as' => 'login.admin']);
 
 /*
  * #**********NOTE************#

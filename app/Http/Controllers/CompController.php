@@ -9,6 +9,7 @@ use App\Work;
 use App\City;
 use App\Country;
 use App\Service;
+use App\Mission;
 use DB;
 use Auth;
 use App;
@@ -143,6 +144,47 @@ class CompController extends Controller
         $image = $this->uploadImageCrop($req->image, $custom_adds);
         Service::where('serv_comp',Auth::guard('comp')->user()->comp_id)->where('serv_id', $last_serv->serv_id)->update([
             'serv_logo' => $image->image_name
+        ]);
+        return ['success' => true];
+    }
+
+    
+    public function newMiss(Request $rq){
+        if(Auth::guard('comp')->user()->comp_sort == 'bene_comp' || Auth::guard('comp')->user()->comp_sort == 'both_comp'){
+        $data = [
+            'miss_name' => $rq->name,
+            'miss_points' => $rq->points,
+            'miss_location' => $rq->location,
+            'miss_country' => $rq->country,
+            'miss_city' => $rq->city,
+            'miss_range' => $rq->range,
+            'miss_desc' => $rq->desc,
+            'miss_comp' => Auth::guard('comp')->user()->comp_id,
+        ];
+        if($rq->range == '1'){
+            $data['miss_start_date'] = $rq->start_date;
+            $data['miss_end_date'] = $rq->end_date;
+        }
+
+        Mission::insert($data);
+        return [
+            'msg' => 'created',
+            'success' => true
+        ];
+        }else{
+            return [
+                'msg' => "Unable to create new mission  , you have no permissions",
+                'success' => false
+            ];
+        }
+    }
+    
+    public function uploadMissLogo(Request $req){
+        $last_miss = Mission::where('miss_comp',Auth::guard('comp')->user()->comp_id)->orderby('miss_id', 'desc')->first();
+        $custom_adds = mb_substr(sha1(sha1(Auth::guard('comp')->user()->comp_email) . time()), 0, 7) . "_" . mb_substr(md5(sha1(Auth::guard('comp')->user()->comp_email) . time() * time()), -10);
+        $image = $this->uploadImageCrop($req->image, $custom_adds);
+        Mission::where('miss_comp',Auth::guard('comp')->user()->comp_id)->where('miss_id', $last_miss->miss_id)->update([
+            'miss_logo' => $image->image_name
         ]);
         return ['success' => true];
     }
